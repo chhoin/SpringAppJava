@@ -1,0 +1,31 @@
+###note 
+i user java 7
+so it also allow to run with tomcate 7
+
+## all pass is 123456
+user: admin@gmail.com
+pass: 123456
+
+
+CREATE TABLE Tbl_Role(
+   id  			SERIAL PRIMARY KEY,
+   role_name    TEXT      NOT NULL
+);
+
+
+CREATE TABLE Tbl_User(
+   id  					SERIAL PRIMARY KEY,
+   user_name    varchar(255)	NOT NULL,
+   email				varchar(255) 	NOT NULL,
+   PASSWORD			varchar(255) 	NOT NULL,
+   status			  varchar(50) 	NOT NULL,
+	 approved_date timestamp  default NULL,
+	 created_date timestamp  default NULL,
+	 updated_date timestamp  default NULL
+);
+
+CREATE TABLE Tbl_User_role(
+   id  					SERIAL PRIMARY KEY,
+   user_id      integer REFERENCES Tbl_user(id),
+   role_id      integer REFERENCES Tbl_role(id)
+);
