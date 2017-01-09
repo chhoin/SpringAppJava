@@ -11,84 +11,51 @@ public class Pagination implements Serializable{
 
 	private static final long serialVersionUID = -7738938410064733771L;
 	private Long page;
-	private Long item;
+	private Double item;
 	private Long begin;
-	private Long totalCount;
-	private Long totalPages;
+	private Double totalRecord;
+	private Long totalPage;
 	
-	public Pagination(){
-		this(1L,15L,0L,0L);
-	}	
-	
-	public Pagination(Long page, Long item, Long totalCount, Long totalPages){
-		this.page = page;
-		this.item = item;
-		this.totalCount = totalCount;
-		this.totalPages = totalPages;
-	}
+
 	public Long getPage() {
 		return page;
 	}
 
-	public Long totalPages(){
-		return  (long) Math.ceil(this.totalCount/item);
-		
-	}
-	
-	public Long nextPage(){
-		return this.page+1;
-	}
-	
-	public Long previousPage(){
-		return this.page-1;
-	}
-	
-	public boolean hasNextPage(){
-		return this.nextPage() <=this.totalPages()? true :false;
-	}
-	
-	public boolean hasPreviousPage(){
-		return this.previousPage()>=1 ? true : false;
-	}	
-	
-	public Long offset(){
-		return (this.page-1)* item;
-	}
-	
-	public void setPage(Long currentPage) {
-		this.page = currentPage;
+	public void setPage(Long page) {
+		this.page = page;
 	}
 
-	public Long getItem() {
+	public Double getItem() {
 		return item;
 	}
 
-	public void setItem(Long item) {
+	public void setItem(Double item) {
 		this.item = item;
 	}
 
-	public Long getTotalCount() {
-		return totalCount;
-	}
-
-	public void setTotalCount(Long totalCount) {
-		this.totalCount = totalCount;
-	}
-
-	public Long getTotalPages() {
-		return totalPages;
-	}
-
-	public void setTotalPages(Long totalPages) {
-		this.totalPages = totalPages;
-	}
-
 	public Long getBegin() {
-		this.begin = (this.getItem()*this.getPage())-this.getItem();
+		this.begin = (long) ((this.item*this.page)-this.item);
 		return begin;
 	}
 
 	public void setBegin(Long begin) {
 		this.begin = begin;
+	}
+
+	public Double getTotalRecord() {
+		return totalRecord;
+	}
+
+	public void setTotalRecord(Double totalRecord) {
+		this.totalRecord = totalRecord;
+	}
+
+	public Long getTotalPage() {
+		this.totalPage = (long) Math.ceil(this.totalRecord/this.item) ;
+		return totalPage;
+	}
+
+	public void setTotalPage(Long totalPage) {
+		this.totalPage = totalPage;
 	}
 }

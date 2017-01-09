@@ -1,10 +1,7 @@
 package com.spring.app.test;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import com.spring.app.entities.User;
+import com.spring.app.entities.Pagination;
 import com.spring.app.repositories.impl.UserDaoIml;
-import com.spring.app.utilities.MyDateUtils;
 
 public class TestDB {
 
@@ -62,7 +59,9 @@ public class TestDB {
 		/**
 		 * count
 		 */
-		System.out.println(user.detail(1L));
+		//System.out.println(user.detail(1L));
+		
+	
 		 
 
 	}
