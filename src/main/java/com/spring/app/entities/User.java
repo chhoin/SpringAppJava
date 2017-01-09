@@ -19,6 +19,12 @@ public class User implements UserDetails{
 	private String username;
 	private String email;
 	private String password;
+	
+	private int phone;
+	private String gender;
+	private Date dob;
+	private String thumnail;
+	
 	private String status;
 	private Date approvedDate;
 	private Date createdDate;
@@ -29,8 +35,6 @@ public class User implements UserDetails{
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
-    
-    
 
 	public int getId() {
 		return id;
@@ -139,5 +143,39 @@ public class User implements UserDetails{
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public int getPhone() {
+		return phone;
+	}
+
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getThumnail() {
+		return thumnail;
+	}
+
+	public void setThumnail(String thumnail) {
+		this.thumnail = thumnail;
+	}
+	
+	
 
 }
