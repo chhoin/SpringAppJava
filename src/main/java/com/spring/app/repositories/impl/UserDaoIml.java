@@ -34,7 +34,7 @@ public class UserDaoIml implements UserDao{
 	 */
 	public User findUserByUserEmail(String userEmail) {
 		User user = new User();
-		String sql = "SELECT id, user_name, email, password, status, approved_date, created_date, updated_date"
+		String sql = "SELECT id, user_name, email, password, phone, gender, dob, thumnail,  status, approved_date, created_date, updated_date"
 				   + " FROM tbl_user WHERE email=?";
 		try {
 			con = dataSource.getConnection();
@@ -107,7 +107,7 @@ public class UserDaoIml implements UserDao{
 
 	public User detail(int id) {
 		User user = new User();
-		String sql = "SELECT id, user_name, email, password, status, approved_date, created_date, updated_date"
+		String sql = "SELECT id, user_name, email, password, phone, gender, dob, thumnail, status, approved_date, created_date, updated_date"
 					+" FROM tbl_user WHERE id=?";
 		try{
 			con = dataSource.getConnection();
