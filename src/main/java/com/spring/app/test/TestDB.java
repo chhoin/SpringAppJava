@@ -62,7 +62,7 @@ public class TestDB {
 		/**
 		 * count
 		 */
-		System.out.println(user.detail(6L));
+		System.out.println(user.detail(1L));
 		 
 
 	}

@@ -37,19 +37,24 @@ public class UserDaoIml implements UserDao{
 				   + " FROM tbl_user WHERE email=?";
 		
 		try {
+			//con = com.spring.app.test.Connection.getConnection();
 			con = dataSource.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, userEmail);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				user.setId(rs.getLong(1));
-				user.setUsername(rs.getString((2)));
-				user.setEmail(rs.getString(3));
-				user.setPassword(rs.getString((4)));
-				user.setStatus(rs.getString((5)));
-				user.setApprovedDate((rs.getDate(6)));
-				user.setCreatedDate((rs.getDate(7)));
-				user.setUpdatedDate((rs.getDate(8)));
+				user.setId(rs.getLong("id"));
+				user.setUsername(rs.getString(("user_name")));
+				user.setEmail(rs.getString("email"));
+				user.setPassword(rs.getString(("password")));
+				user.setPhone(rs.getString(("phone")));
+				user.setGender(rs.getString(("gender")));
+				user.setDob(rs.getDate("dob"));
+				user.setThumnail(rs.getString(("thumnail")));
+				user.setStatus(rs.getString(("status")));
+				user.setApprovedDate((rs.getDate("approved_date")));
+				user.setCreatedDate((rs.getDate("created_date")));
+				user.setUpdatedDate((rs.getDate("updated_date")));
 				user.setRoles(this.findUserRoleByUserId(user.getId()));
 				return user;
 			}
@@ -156,7 +161,7 @@ public class UserDaoIml implements UserDao{
 				user.setEmail(rs.getString("email"));
 				user.setPassword(rs.getString(("password")));
 				user.setPhone(rs.getString(("phone")));
-				user.setGender(rs.getString(("phone")));
+				user.setGender(rs.getString(("gender")));
 				user.setDob(rs.getDate("dob"));
 				user.setThumnail(rs.getString(("thumnail")));
 				user.setStatus(rs.getString(("status")));
