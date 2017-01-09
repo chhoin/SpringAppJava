@@ -33,7 +33,7 @@ public class MainController {
 	
 	@RequestMapping(value = {"/admin"} ,method = RequestMethod.GET)
 	public String adminPage(Model model) {
-		User result = userService.detail(1);
+		User result = userService.detail(1L);
 		model.addAttribute("user", result);
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

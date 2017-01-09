@@ -31,19 +31,19 @@ public class UserServiceImplement implements UserService{
 		return userDao.getUser(pagin);
 	}
 
-	public User detail(int id) {
+	public User detail(Long id) {
 		return userDao.detail(id);
 	}
 
-	public boolean insert(User product) {
-		return userDao.insert(product);
+	public boolean insert(User user) {
+		return userDao.insert(user);
 	}
 
-	public boolean update(User product) {
-		return userDao.update(product);
+	public boolean update(User user) {
+		return userDao.update(user);
 	}
 
-	public boolean delete(int id) {
+	public boolean delete(Long id) {
 		return userDao.delete(id);
 	}
 
@@ -51,11 +51,11 @@ public class UserServiceImplement implements UserService{
 		return userDao.searchUser(kesearch, pagin);
 	}
 
-	public int count() {
+	public Long count() {
 		return userDao.count();
 	}
 
-	public int countSearch(String keyword) {
+	public Long countSearch(String keyword) {
 		return userDao.countSearch(keyword);
 	}
 

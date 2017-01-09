@@ -52,8 +52,10 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 		}
 		if (roles.contains("ROLE_ADMIN")) {
 			return "/admin/";
-		}else if(roles.contains("ROLE_KA_CLIENT")){
+		}else if(roles.contains("ROLE_USER")){
 			return "/user/";
+		}else if(roles.contains("ROLE_DBA")){
+			return "/dba/";
 		}else if(roles.contains("ROLE_KA_CLIENT_MEMBER")){
 			return "/ka_api/";
 		}else{
