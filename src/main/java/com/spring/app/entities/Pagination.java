@@ -10,35 +10,36 @@ import java.io.Serializable;
 public class Pagination implements Serializable{
 
 	private static final long serialVersionUID = -7738938410064733771L;
-	private int page;
-	private int item;
-	private int totalCount;
-	private int totalPages;
+	private Long page;
+	private Long item;
+	private Long begin;
+	private Long totalCount;
+	private Long totalPages;
 	
 	public Pagination(){
-		this(1,15,0,0);
+		this(1L,15L,0L,0L);
 	}	
 	
-	public Pagination(int page, int item, int totalCount, int totalPages){
+	public Pagination(Long page, Long item, Long totalCount, Long totalPages){
 		this.page = page;
 		this.item = item;
 		this.totalCount = totalCount;
 		this.totalPages = totalPages;
 	}
-	public int getPage() {
+	public Long getPage() {
 		return page;
 	}
 
-	public int totalPages(){
-		return (int) Math.ceil((double)this.totalCount/item);
+	public Long totalPages(){
+		return  (long) Math.ceil(this.totalCount/item);
 		
 	}
 	
-	public int nextPage(){
+	public Long nextPage(){
 		return this.page+1;
 	}
 	
-	public int previousPage(){
+	public Long previousPage(){
 		return this.page-1;
 	}
 	
@@ -50,35 +51,44 @@ public class Pagination implements Serializable{
 		return this.previousPage()>=1 ? true : false;
 	}	
 	
-	public int offset(){
+	public Long offset(){
 		return (this.page-1)* item;
 	}
 	
-	public void setPage(int currentPage) {
+	public void setPage(Long currentPage) {
 		this.page = currentPage;
 	}
 
-	public int getItem() {
+	public Long getItem() {
 		return item;
 	}
 
-	public void setItem(int item) {
+	public void setItem(Long item) {
 		this.item = item;
 	}
 
-	public int getTotalCount() {
+	public Long getTotalCount() {
 		return totalCount;
 	}
 
-	public void setTotalCount(int totalCount) {
+	public void setTotalCount(Long totalCount) {
 		this.totalCount = totalCount;
 	}
 
-	public int getTotalPages() {
+	public Long getTotalPages() {
 		return totalPages;
 	}
 
-	public void setTotalPages(int totalPages) {
+	public void setTotalPages(Long totalPages) {
 		this.totalPages = totalPages;
+	}
+
+	public Long getBegin() {
+		this.begin = (this.getItem()*this.getPage())-this.getItem();
+		return begin;
+	}
+
+	public void setBegin(Long begin) {
+		this.begin = begin;
 	}
 }

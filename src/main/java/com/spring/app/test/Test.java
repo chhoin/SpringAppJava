@@ -1,6 +1,8 @@
 package com.spring.app.test;import java.util.Calendar;
 import java.util.Date;
 
+import com.spring.app.utilities.MyDateUtils;
+
 public class Test {
 	
 	public static int calculation(int[] value) {
@@ -22,7 +24,15 @@ public class Test {
 		/*Test.validate(113);  
 	    System.out.println("rest of the code...");  */
 		
-		Date systemTime = Calendar.getInstance().getTime();
-		System.out.println(systemTime);
+		/*Date systemTime = Calendar.getInstance().getTime();
+		System.out.println(systemTime);*/
+		
+		//System.out.println(MyDateUtils.today());
+		
+		  
+		  java.sql.Timestamp timestamp = new java.sql.Timestamp(MyDateUtils.today().getTime());
+		  System.out.println(timestamp);
+		    
+		    
 	}
 }

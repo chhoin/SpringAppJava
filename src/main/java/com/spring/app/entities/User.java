@@ -15,12 +15,12 @@ public class User implements UserDetails{
 
 	private static final long serialVersionUID = -8709915527925150911L;
 	
-	private int id;
+	private Long id;
 	private String username;
 	private String email;
 	private String password;
 	
-	private int phone;
+	private String phone;
 	private String gender;
 	private Date dob;
 	private String thumnail;
@@ -36,11 +36,11 @@ public class User implements UserDetails{
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -144,11 +144,11 @@ public class User implements UserDetails{
 		this.status = status;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
