@@ -1,6 +1,10 @@
 package com.spring.app.test;
 
+import java.awt.PageAttributes;
+import java.util.ArrayList;
+
 import com.spring.app.entities.Pagination;
+import com.spring.app.entities.User;
 import com.spring.app.repositories.impl.UserDaoIml;
 
 public class TestDB {
@@ -60,6 +64,18 @@ public class TestDB {
 		 * count
 		 */
 		//System.out.println(user.detail(1L));
+		
+		/**
+		 * list with pagination
+		 */
+		Pagination page = new Pagination();
+		page.setTotalRecord(5D);
+		page.setItem(2D);
+		page.setPage(3L);
+		
+		ArrayList<User> result = new ArrayList<User>();
+		result = user.getUser(page);
+		System.out.println(result.size());
 		
 	
 		 

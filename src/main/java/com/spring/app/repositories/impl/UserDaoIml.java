@@ -43,19 +43,19 @@ public class UserDaoIml implements UserDao{
 			ps.setString(1, userEmail);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				user.setId(rs.getLong("id"));
-				user.setUsername(rs.getString(("user_name")));
-				user.setEmail(rs.getString("email"));
-				user.setPassword(rs.getString(("password")));
-				user.setPhone(rs.getString(("phone")));
-				user.setGender(rs.getString(("gender")));
-				user.setDob(rs.getDate("dob"));
-				user.setThumnail(rs.getString(("thumnail")));
-				user.setStatus(rs.getString(("status")));
-				user.setApprovedDate((rs.getDate("approved_date")));
-				user.setCreatedDate((rs.getDate("created_date")));
-				user.setUpdatedDate((rs.getDate("updated_date")));
-				user.setRoles(this.findUserRoleByUserId(user.getId()));
+				user.setId(				rs.getLong("id")				);
+				user.setUsername(		rs.getString("user_name")		);
+				user.setEmail(			rs.getString("email")			);
+				user.setPassword(		rs.getString("password")		);
+				user.setPhone(			rs.getString("phone")			);
+				user.setGender(			rs.getString("gender")			);
+				user.setDob(			rs.getDate("dob")				);
+				user.setThumnail(		rs.getString("thumnail")		);
+				user.setStatus(			rs.getString("status")			);
+				user.setApprovedDate(	rs.getDate("approved_date")		);
+				user.setCreatedDate(	rs.getDate("created_date")		);
+				user.setUpdatedDate(	rs.getDate("updated_date")		);
+				user.setRoles(this.findUserRoleByUserId(user.getId())	);
 				return user;
 			}
 		} catch (SQLException e) {
@@ -107,9 +107,8 @@ public class UserDaoIml implements UserDao{
 
 	public ArrayList<User> getUser(Pagination pagin) {
 		
-	/*	ArrayList<User> playlists =new ArrayList<User>();
-		int begin =(pagin.getItem()*pagin.getPage())-pagin.getItem();
-		String sql = "SELECT id, user_name, email, password, phone, gender, dob, thumnail,  status, approved_date, created_date, updated_date"
+		ArrayList<User> users =new ArrayList<User>();
+		String sql = "SELECT id, user_name, email, password, phone, gender, dob, thumnail, status, approved_date, created_date, updated_date"
 				   + " FROM tbl_user ORDER BY id DESC"
 				   + " OFFSET ? LIMIT ? ";
 		
@@ -118,21 +117,27 @@ public class UserDaoIml implements UserDao{
 			//con = dataSource.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			
-			ps.setInt(1, begin);
-			ps.setInt(2, pagin.getItem());
+			ps.setLong(1, new Double(pagin.getBegin()).longValue());
+			ps.setLong(2,  new Double(pagin.getItem()).longValue());
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()){
-				Playlist playlist = new Playlist();
-				playlist.setPlaylistId(Encryption.encode(rs.getString("playlistid")));
-				playlist.setPlaylistName(rs.getString("playlistname"));
-				playlist.setThumbnailUrl(rs.getString("thumbnailurl"));
-				playlist.setCountVideos(rs.getInt("countvideos"));
-				playlist.setPublicView(rs.getBoolean("publicview"));
-				playlist.setStatus(rs.getBoolean("status"));
-				playlists.add(playlist);
+				User u = new User();
+				u.setId(			rs.getLong("id")			);
+				u.setUsername(		rs.getString("user_name")	);
+				u.setEmail(			rs.getString("email")		);
+				u.setPassword(		rs.getString("password")	);
+				u.setPhone(			rs.getString("phone")		);
+				u.setGender(		rs.getString("gender")		);
+				u.setDob(			rs.getDate("dob")			);
+				u.setThumnail(		rs.getString("thumnail")	);
+				u.setStatus(		rs.getString("status")		);
+				u.setApprovedDate(	rs.getDate("approved_date")	);
+				u.setCreatedDate(	rs.getDate("created_date")	);
+				u.setUpdatedDate(	rs.getDate("updated_date")	);
+				users.add(u);
 			}
-			return playlists;
+			return users;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -141,7 +146,7 @@ public class UserDaoIml implements UserDao{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}*/
+		}
 		return null;
 	}
 
@@ -156,18 +161,18 @@ public class UserDaoIml implements UserDao{
 			ps.setLong(1, id);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()){
-				user.setId(rs.getLong("id"));
-				user.setUsername(rs.getString(("user_name")));
-				user.setEmail(rs.getString("email"));
-				user.setPassword(rs.getString(("password")));
-				user.setPhone(rs.getString(("phone")));
-				user.setGender(rs.getString(("gender")));
-				user.setDob(rs.getDate("dob"));
-				user.setThumnail(rs.getString(("thumnail")));
-				user.setStatus(rs.getString(("status")));
-				user.setApprovedDate((rs.getDate("approved_date")));
-				user.setCreatedDate((rs.getDate("created_date")));
-				user.setUpdatedDate((rs.getDate("updated_date")));
+				user.setId(				rs.getLong("id")				);
+				user.setUsername(		rs.getString("user_name")		);
+				user.setEmail(			rs.getString("email")			);
+				user.setPassword(		rs.getString("password")		);
+				user.setPhone(			rs.getString("phone")			);
+				user.setGender(			rs.getString("gender")			);
+				user.setDob(			rs.getDate("dob")				);
+				user.setThumnail(		rs.getString("thumnail")		);
+				user.setStatus(			rs.getString("status")			);
+				user.setApprovedDate(	rs.getDate("approved_date")		);
+				user.setCreatedDate(	rs.getDate("created_date")		);
+				user.setUpdatedDate(	rs.getDate("updated_date")		);
 				return user;
 			}
 		}catch(SQLException e){
