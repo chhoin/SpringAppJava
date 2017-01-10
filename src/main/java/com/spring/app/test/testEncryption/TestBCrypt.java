@@ -1,4 +1,4 @@
-package com.spring.app.test;
+package com.spring.app.test.testEncryption;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

@@ -1,13 +1,12 @@
-package com.spring.app.test;
+package com.spring.app.test.testDataBase;
 
-import java.awt.PageAttributes;
 import java.util.ArrayList;
 
 import com.spring.app.entities.Pagination;
 import com.spring.app.entities.User;
 import com.spring.app.repositories.impl.UserDaoIml;
 
-public class TestDB {
+public class TestUserImplement {
 
 	public static void main(String[] args) {
 		//con = com.spring.app.test.Connection.getConnection();
@@ -63,18 +62,18 @@ public class TestDB {
 		/**
 		 * count
 		 */
-		//System.out.println(user.detail(1L));
+		//System.out.println(user.countSearch("a"));
 		
 		/**
 		 * list with pagination
 		 */
 		Pagination page = new Pagination();
-		page.setTotalRecord(5D);
-		page.setItem(2D);
+		page.setTotalRecord(2D);
+		page.setItem(1D);
 		page.setPage(3L);
 		
 		ArrayList<User> result = new ArrayList<User>();
-		result = user.getUser(page);
+		result = user.searchUser("a", page);
 		System.out.println(result.size());
 		
 	

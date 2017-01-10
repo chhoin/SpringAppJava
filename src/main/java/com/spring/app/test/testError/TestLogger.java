@@ -1,4 +1,4 @@
-package com.spring.app.test;
+package com.spring.app.test.testError;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

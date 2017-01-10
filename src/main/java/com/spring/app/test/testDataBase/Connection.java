@@ -1,4 +1,4 @@
-package com.spring.app.test;
+package com.spring.app.test.testDataBase;
 
 import java.sql.*;
 

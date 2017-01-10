@@ -113,15 +113,15 @@ public class UserDaoIml implements UserDao{
 				   + " OFFSET ? LIMIT ? ";
 		
 		try {
-			con = com.spring.app.test.Connection.getConnection();
-			//con = dataSource.getConnection();
+			//con = com.spring.app.test.Connection.getConnection();
+			con = dataSource.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			
 			ps.setLong(1, new Double(pagin.getBegin()).longValue());
 			ps.setLong(2,  new Double(pagin.getItem()).longValue());
 			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next()){
+
+			while (rs.next()) {
 				User u = new User();
 				u.setId(			rs.getLong("id")			);
 				u.setUsername(		rs.getString("user_name")	);
@@ -140,7 +140,7 @@ public class UserDaoIml implements UserDao{
 			return users;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
@@ -154,13 +154,13 @@ public class UserDaoIml implements UserDao{
 		User user = new User();
 		String sql = "SELECT id, user_name, email, password, phone, gender, dob, thumnail, status, approved_date, created_date, updated_date"
 					+" FROM tbl_user WHERE id=?";
-		try{
+		try {
 			//con = com.spring.app.test.Connection.getConnection();
 			con = dataSource.getConnection();
 			PreparedStatement ps= con.prepareStatement(sql);
 			ps.setLong(1, id);
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()){
+			if (rs.next()){
 				user.setId(				rs.getLong("id")				);
 				user.setUsername(		rs.getString("user_name")		);
 				user.setEmail(			rs.getString("email")			);
@@ -175,10 +175,10 @@ public class UserDaoIml implements UserDao{
 				user.setUpdatedDate(	rs.getDate("updated_date")		);
 				return user;
 			}
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e);
-		}finally {
+		} finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
@@ -262,15 +262,15 @@ public class UserDaoIml implements UserDao{
 		try {
 			con = dataSource.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
-			
+
 			ps.setString(1, UserStatus.DELETE);
 			ps.setTimestamp(2, new java.sql.Timestamp(MyDateUtils.today().getTime()));
 			ps.setLong(3, id);
-		
+
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
-	
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -284,7 +284,50 @@ public class UserDaoIml implements UserDao{
 	}
 
 	public ArrayList<User> searchUser(String kesearch, Pagination pagin) {
-		// TODO Auto-generated method stub
+
+		ArrayList<User> users =new ArrayList<User>();
+		String sql = "SELECT id, user_name, email, password, phone, gender, dob, thumnail, status, approved_date, created_date, updated_date"
+				   + " FROM tbl_user"
+				   + " WHERE LOWER(user_name) LIKE LOWER(?)"
+				   + " ORDER BY id DESC"
+				   + " OFFSET ? LIMIT ? ";
+		
+		try {
+			//con = com.spring.app.test.testDataBase.Connection.getConnection();
+			con = dataSource.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setString(1, "%"+kesearch+"%");
+			ps.setLong(2, new Double(pagin.getBegin()).longValue());
+			ps.setLong(3,  new Double(pagin.getItem()).longValue());
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				User u = new User();
+				u.setId(			rs.getLong("id")			);
+				u.setUsername(		rs.getString("user_name")	);
+				u.setEmail(			rs.getString("email")		);
+				u.setPassword(		rs.getString("password")	);
+				u.setPhone(			rs.getString("phone")		);
+				u.setGender(		rs.getString("gender")		);
+				u.setDob(			rs.getDate("dob")			);
+				u.setThumnail(		rs.getString("thumnail")	);
+				u.setStatus(		rs.getString("status")		);
+				u.setApprovedDate(	rs.getDate("approved_date")	);
+				u.setCreatedDate(	rs.getDate("created_date")	);
+				u.setUpdatedDate(	rs.getDate("updated_date")	);
+				users.add(u);
+			}
+			return users;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return null;
 	}
 
@@ -293,15 +336,16 @@ public class UserDaoIml implements UserDao{
 		String sql = "SELECT COUNT(id) FROM tbl_user ";
 
 		try {
+			// con = com.spring.app.test.Connection.getConnection();
 			con = dataSource.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
-			
+
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()){
+			if (rs.next()) {
 				count = rs.getLong(1);
 				return count;
 			}
-	
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -319,17 +363,18 @@ public class UserDaoIml implements UserDao{
 		String sql = "SELECT COUNT(id) FROM tbl_user WHERE LOWER(user_name) LIKE LOWER(?)";
 
 		try {
+			// con = com.spring.app.test.Connection.getConnection();
 			con = dataSource.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
-			
-			ps.setString(1, "%"+keyword+"%");
-			
+
+			ps.setString(1, "%" + keyword + "%");
+
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()){
+			if (rs.next()) {
 				count = rs.getLong(1);
 				return count;
 			}
-	
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

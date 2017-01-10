@@ -1,4 +1,6 @@
-package com.spring.app.test;
+package com.spring.app.test.testError;
+
+import com.spring.app.test.Test;
 
 public class TestThrow {
 
