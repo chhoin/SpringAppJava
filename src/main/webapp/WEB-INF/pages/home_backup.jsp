@@ -1,37 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
 
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%> --%>
-<%@ page isELIgnored="false"%>
-
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <meta content="" name="description" />
-        <meta content="" name="author" />
-
-        <!-- CORE CSS FRAMEWORK - START -->
-        <link href="${pageContext.request.contextPath}/assetAdmin/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="${pageContext.request.contextPath}/assetAdmin/plugins/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-        <link href="${pageContext.request.contextPath}/assetAdmin/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-        <link href="${pageContext.request.contextPath}/assetAdmin/css/animate.min.css" rel="stylesheet" type="text/css"/>
-        <link href="${pageContext.request.contextPath}/assetAdmin/plugins/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" type="text/css"/>
+        <meta content="" name="description !!!" />
+        <meta content="" name="author !!!" />
+        
+         <!-- CORE CSS FRAMEWORK - START -->
+        <link href="<%= request.getContextPath()%>/resources/assetAdmin/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="<%= request.getContextPath()%>/resources/assetAdmin/plugins/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="<%= request.getContextPath()%>/resources/assetAdmin/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="<%= request.getContextPath()%>/resources/assetAdmin/css/animate.min.css" rel="stylesheet" type="text/css"/>
+        <link href="<%= request.getContextPath()%>/resources/assetAdmin/plugins/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" type="text/css"/>
         <!-- CORE CSS FRAMEWORK - END -->
 
         <!-- CORE CSS TEMPLATE - START -->
-        <link href="${pageContext.request.contextPath}/assetAdmin/css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="${pageContext.request.contextPath}/assetAdmin/css/responsive.css" rel="stylesheet" type="text/css"/>
+        <link href="<%= request.getContextPath()%>/resources/assetAdmin/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="<%= request.getContextPath()%>/resources/assetAdmin/css/responsive.css" rel="stylesheet" type="text/css"/>
         <!-- CORE CSS TEMPLATE - END -->
-
+        
         <style type="text/css">
 
         </style>
-   		 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assetAdmin/sweetalert/sweetalert.css">
+		
 	</head>
 <body>
 		<div class='page-topbar '>
@@ -78,13 +71,15 @@
         <div class="page-container row-fluid">
             <!-- SIDEBAR - START -->
             <div class="page-sidebar ">
+            
+            
                 <!-- MAIN MENU Sibar - START -->
                 <div class="page-sidebar-wrapper" id="main-menu-wrapper"> 
                        <!-- USER INFO - START -->
                     <div class="profile-info row">
                         <div class="profile-image col-md-4 col-sm-4 col-xs-4">
                             <a href="#">
-                                <img src= class='img-responsive img-circle'>
+                                <img src="#" class='img-responsive img-circle'>
                             </a>
                         </div>
                         <div class="profile-details col-md-8 col-sm-8 col-xs-8">
@@ -98,23 +93,14 @@
                     </div>
                     <!-- USER INFO - END -->
                     <ul class='wraplist'>	
-                    	
                     
                         <!-- Dashboard -->
                         <li class=""> 
-                            <a href="http://localhost:8000/admin">
+                            <a href="<%= request.getContextPath()%>">
                                 <i class="fa fa-dashboard"></i>
                                 <span class="title">Dashboard</span>
                             </a>
                         </li>
-                        <!-- Status -->
-                         <li class=""> <a href="javascript:"> <i class="fa fa-wrench"></i> <span class="title">Satus</span> <span class="arrow "></span> </a>
-                            <ul class="sub-menu">
-                                <li class=""> <a href="http://localhost:8000/main/status.html"> <i class="fa fa-plus-square"></i> <span class="title">MainController Status</span></a> </li>
-                                <li class=""> <a href="http://localhost:8000/json/status.html"> <i class="fa fa-plus-square"></i> <span class="title">JSONController Status</span></a> </li>
-                            </ul>
-                        </li>
-
     
                         <!-- USER -->
                         <li class=""> <a href="javascript:"> <i class="fa fa-user"></i> <span class="title">User</span> <span class="arrow "></span> </a>
@@ -128,6 +114,8 @@
 
                 </div>
                 <!-- MAIN MENU - END -->
+                
+                
 
 				<!--End Count End User-->
             </div>
@@ -149,13 +137,13 @@
 						<section class="box ">
 		        			<div class="content-body">
 		              			<h1>Dashboard</h1>
-		                                <p>Guest</p>  
+		                            <p>Guest</p>  
 
 
 		                    </div>
+						</section>
 		        	</div>
-    			</section>
-					</div>
+    			
                </section>
             </section>
             <!-- END CONTENT --> 
@@ -163,24 +151,23 @@
     	
 	
 	<!-- END CONTAINER -->
-        <!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-        <!-- CORE JS FRAMEWORK - START --> 
-        <script src="http://localhost:8000/assetAdmin/assets/js/jquery-1.11.2.min.js" type="text/javascript"></script> 
-        <script src="http://localhost:8000/assetAdmin/assets/js/jquery.easing.min.js" type="text/javascript"></script> 
-        <script src="http://localhost:8000/assetAdmin/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> 
-        <script src="http://localhost:8000/assetAdmin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js" type="text/javascript"></script> 
-        <script src="http://localhost:8000/assetAdmin/assets/plugins/viewport/viewportchecker.js" type="text/javascript"></script>  
-        <!-- CORE JS FRAMEWORK - END -->
+    <!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+    <!-- CORE JS FRAMEWORK - START --> 
+    <script src="<%= request.getContextPath()%>/resources/assetAdmin/js/jquery-1.11.2.min.js" type="text/javascript"></script> 
+    <script src="<%= request.getContextPath()%>/resources/assetAdmin/js/jquery.easing.min.js" type="text/javascript"></script> 
+    <script src="<%= request.getContextPath()%>/resources/assetAdmin/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> 
+    <script src="<%= request.getContextPath()%>/resources/assetAdmin/plugins/perfect-scrollbar/perfect-scrollbar.min.js" type="text/javascript"></script> 
+    <script src="<%= request.getContextPath()%>/resources/assetAdmin/plugins/viewport/viewportchecker.js" type="text/javascript"></script>  
+    <!-- CORE JS FRAMEWORK - END -->
 
-        <!-- CORE TEMPLATE JS - START -->
-        <script src="http://localhost:8000/assetAdmin/assets/js/scripts.js" type="text/javascript"></script>
-        <!-- END CORE TEMPLATE JS - END -->
+    <!-- CORE TEMPLATE JS - START -->
+    <script src="<%= request.getContextPath()%>/resources/assetAdmin/js/scripts.js" type="text/javascript"></script>
+    <!-- END CORE TEMPLATE JS - END -->
 
-        <script src="http://localhost:8000/assetAdmin/assets/js/bootpage.js"></script>
-		<script src="http://localhost:8000/assetAdmin/assets/sweetalert/sweetalert.min.js"></script>
-		<script type="text/javascript">
-        
-   
-</script>
+	<script type="text/javascript">
+	      
+	 
+	</script>
+
 </body>
 </html>

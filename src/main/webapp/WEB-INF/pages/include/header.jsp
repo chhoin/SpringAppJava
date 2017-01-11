@@ -1,9 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<div class='page-topbar '>
+	<!--Top Title on Menu-->
+          <div class='logo-area'>
 
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
-
-<!-- This contains the most used tag libraries -->
+          </div>
+	
+	<!--Login Sextion-->
+          <div class='quick-area'>
+              <div class='pull-left'>
+                  <ul class="info-menu left-links list-inline list-unstyled">
+                      <li class="sidebar-toggle-wrap">
+                          <a href="#" data-toggle="sidebar" class="sidebar_toggle">
+                              <i class="fa fa-bars"></i>
+                          </a>
+				</li>
+                  </ul>
+              </div>
+              <div class='pull-right'>
+                  <ul class="info-menu right-links list-inline list-unstyled">
+                      <li class="profile">
+                          <a href="#" data-toggle="dropdown" class="toggle">
+                               <img src= alt="user-image" class="img-circle img-inline">
+                              <span>
+                              	
+							<i class="fa fa-angle-down"></i>
+						</span>
+                          </a>
+                          <ul class="dropdown-menu profile animated fadeIn">
+                              <li><a href="/en/user/profile"> <i class="fa fa-user"></i>Profile </a> </li>
+                              <li class="last"><a href="http://localhost:8000/logout"><i class="fa fa-lock"></i>Logout</a></li>
+                          </ul>
+                      </li>
+                  </ul>			
+              </div>
+          </div>
+	<!--End Login Section-->
+      </div>
