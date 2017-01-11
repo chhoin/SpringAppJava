@@ -25,8 +25,8 @@ public class Pagination implements Serializable{
 		this.page = page;
 	}
 
-	public Double getItem() {
-		return item;
+	public Long getItem() {
+		return item.longValue();
 	}
 
 	public void setItem(Double item) {
@@ -42,8 +42,8 @@ public class Pagination implements Serializable{
 		this.begin = begin;
 	}
 
-	public Double getTotalRecord() {
-		return totalRecord;
+	public Long getTotalRecord() {
+		return totalRecord.longValue();
 	}
 
 	public void setTotalRecord(Double totalRecord) {
