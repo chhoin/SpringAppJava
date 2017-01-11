@@ -19,7 +19,7 @@
                   <ul class="info-menu right-links list-inline list-unstyled">
                       <li class="profile">
                           <a href="#" data-toggle="dropdown" class="toggle">
-                               <img src= alt="user-image" class="img-circle img-inline">
+                               <img src="" title="user image" class="img-circle img-inline"/>
                               <span>
                               	
 							<i class="fa fa-angle-down"></i>

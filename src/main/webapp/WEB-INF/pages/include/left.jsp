@@ -3,7 +3,7 @@
 	           <div class="profile-info row">
 	               <div class="profile-image col-md-4 col-sm-4 col-xs-4">
 	                   <a href="#">
-	                       <img src="#" class='img-responsive img-circle'>
+	                       <img  class='img-responsive img-circle'>
 	                   </a>
 	               </div>
 	               <div class="profile-details col-md-8 col-sm-8 col-xs-8">
@@ -20,17 +20,17 @@
 	           
 	               <!-- Dashboard -->
 	               <li class=""> 
-	                   <a href="<%= request.getContextPath()%>">
+	                   <a href="<%= request.getContextPath()%>/admin">
 	                       <i class="fa fa-dashboard"></i>
 	                       <span class="title">Dashboard</span>
 	                   </a>
 	               </li>
 	
 	               <!-- USER -->
-	               <li class=""> <a href="javascript:"> <i class="fa fa-user"></i> <span class="title">User</span> <span class="arrow "></span> </a>
+	               <li class=""> <a href="javascript:"> <i class="fa fa-user"></i> <span class="title">User Management</span> <span class="arrow "></span> </a>
 	                   <ul class="sub-menu">
-	                       <li class=""> <a href="http://localhost:8000/en/user"> <i class="fa fa-plus-square"></i> <span class="title">MainController Users</span></a> </li>
-	                       <li class=""> <a href="http://localhost:8000/en/user"> <i class="fa fa-plus-square"></i> <span class="title">JSONController Users</span></a> </li>
+	                       <li class=""> <a href="<%= request.getContextPath()%>/admin/user/index"> <i class="fa fa-plus-square"></i> <span class="title">Users</span></a> </li>
+	                       <li class=""> <a href="<%= request.getContextPath()%>/admin/userRole/index"> <i class="fa fa-plus-square"></i> <span class="title">Users Role</span></a> </li>
 	                   </ul>
 	               </li>
 	

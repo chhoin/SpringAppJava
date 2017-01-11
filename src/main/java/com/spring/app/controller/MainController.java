@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.spring.app.entities.User;
 import com.spring.app.services.ser.UserService;
 
+/**
+ * 
+ * @author sok.kimchhoin
+ *
+ */
 @Controller
 /**
  * Indicates that an annotated class is a "Controller" of Spring
@@ -38,9 +43,9 @@ public class MainController {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) authentication.getPrincipal();
-		System.out.println("user id ="+user.getId()+" username ="+user.getUsername()+" password ="+user.getPassword());
+		System.out.println("user id ="+user.getId()+" username ="+user.getUsername());
 		
-		return "/admin/admin";
+		return "/admin/dasboard/dasboard";
 	}
 	
 	@RequestMapping(value = {"/dba"} ,method = RequestMethod.GET)

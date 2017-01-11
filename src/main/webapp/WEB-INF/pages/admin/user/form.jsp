@@ -1,4 +1,4 @@
-<%@include file="../include/header.jsp" %>
+<%@include file="../../include/header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +10,7 @@
         <meta content="" name="author !!!" />
         
         <!--*********start Css header**********-->
-        <%@include file="../include/css_header.jsp" %>
+        <%@include file="../../include/css_header.jsp" %>
         <!--*********start End header**********-->
         
         <style type="text/css">
@@ -19,7 +19,7 @@
 </head>
 <body>
 		<!--*********start Header header**********-->
-        <%@include file="../include/header.jsp" %>
+        <%@include file="../../include/header.jsp" %>
         <!--*********start Header header**********-->
         <!-- END TOPBAR -->
 
@@ -30,7 +30,7 @@
             <div class="page-sidebar ">
             
                 <!--*********start left bar**********-->
-		        <%@include file="../include/left.jsp" %>
+		        <%@include file="../../include/left.jsp" %>
 		        <!--*********start left bar**********-->
 
             </div>
@@ -49,8 +49,7 @@
 					<div class="content-body">
 						<section class="box ">
 		        			<div class="content-body">
-		              			<h1>Dashboard</h1>
-		                            <p>Guest</p>  
+		              			<h1>add</h1>
 
 
 		                    </div>
@@ -66,7 +65,7 @@
 	<!-- END CONTAINER -->
    
    <!--*********start Javascript include **********-->
-   <%@include file="../include/js_footer.jsp" %>
+   <%@include file="../../include/js_footer.jsp" %>
    <!--*********start Javascript include **********-->
 
 	<script type="text/javascript">
