@@ -49,7 +49,7 @@ public class UserDaoIml implements UserDao{
 				user.setPassword(		rs.getString("password")		);
 				user.setPhone(			rs.getString("phone")			);
 				user.setGender(			rs.getString("gender")			);
-				user.setDob(			rs.getDate("dob")				);
+				user.setDob(			rs.getString("dob")				);
 				user.setThumnail(		rs.getString("thumnail")		);
 				user.setStatus(			rs.getString("status")			);
 				user.setApprovedDate(	rs.getDate("approved_date")		);
@@ -129,7 +129,7 @@ public class UserDaoIml implements UserDao{
 				u.setPassword(		rs.getString("password")	);
 				u.setPhone(			rs.getString("phone")		);
 				u.setGender(		rs.getString("gender")		);
-				u.setDob(			rs.getDate("dob")			);
+				u.setDob(			rs.getString("dob")			);
 				u.setThumnail(		rs.getString("thumnail")	);
 				u.setStatus(		rs.getString("status")		);
 				u.setApprovedDate(	rs.getDate("approved_date")	);
@@ -167,7 +167,7 @@ public class UserDaoIml implements UserDao{
 				user.setPassword(		rs.getString("password")		);
 				user.setPhone(			rs.getString("phone")			);
 				user.setGender(			rs.getString("gender")			);
-				user.setDob(			rs.getDate("dob")				);
+				user.setDob(			rs.getString("dob")				);
 				user.setThumnail(		rs.getString("thumnail")		);
 				user.setStatus(			rs.getString("status")			);
 				user.setApprovedDate(	rs.getDate("approved_date")		);
@@ -190,7 +190,7 @@ public class UserDaoIml implements UserDao{
 
 	public boolean insert(User user) {
 		
-		String sql = "INSERT INTO tbl_user (user_name, email, password, gender, thumnail, status, created_date)"
+		String sql = "INSERT INTO tbl_user (user_name, email, password, phone , gender, dob , thumnail, status, created_date)"
 				+" VALUES(?,?,?,?,?,?,?) ";
 
 		try {
@@ -200,10 +200,12 @@ public class UserDaoIml implements UserDao{
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getEmail());
 			ps.setString(3, user.getPassword());
-			ps.setString(4, user.getGender());
-			ps.setString(5, user.getThumnail());
-			ps.setString(6, user.getStatus());
-			ps.setTimestamp(7, new java.sql.Timestamp(MyDateUtils.today().getTime()));
+			ps.setString(4, user.getPhone());
+			ps.setString(5, user.getGender());
+			ps.setTimestamp(6, new java.sql.Timestamp(MyDateUtils.getDate(user.getDob()).getTime()));
+			ps.setString(7, user.getThumnail());
+			ps.setString(8, user.getStatus());
+			ps.setTimestamp(9, new java.sql.Timestamp(MyDateUtils.today().getTime()));
 
 			if (ps.executeUpdate() > 0) {
 				return true;
@@ -234,7 +236,7 @@ public class UserDaoIml implements UserDao{
 			ps.setString(3, user.getPassword());
 			ps.setString(4, user.getPhone());
 			ps.setString(5, user.getGender());
-			ps.setTimestamp(6, new java.sql.Timestamp(user.getDob().getTime()));
+			ps.setTimestamp(6, new java.sql.Timestamp(MyDateUtils.getDate(user.getDob()).getTime()));
 			ps.setString(7, user.getThumnail());
 			ps.setString(8, user.getStatus());
 			ps.setTimestamp(9, new java.sql.Timestamp(MyDateUtils.today().getTime()));
@@ -310,7 +312,7 @@ public class UserDaoIml implements UserDao{
 				u.setPassword(		rs.getString("password")	);
 				u.setPhone(			rs.getString("phone")		);
 				u.setGender(		rs.getString("gender")		);
-				u.setDob(			rs.getDate("dob")			);
+				u.setDob(			rs.getString("dob")			);
 				u.setThumnail(		rs.getString("thumnail")	);
 				u.setStatus(		rs.getString("status")		);
 				u.setApprovedDate(	rs.getDate("approved_date")	);

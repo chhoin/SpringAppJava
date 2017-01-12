@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.spring.app.entities.Pagination;
 import com.spring.app.entities.User;
 import com.spring.app.services.ser.UserService;
+import com.spring.app.utilities.MyDateUtils;
 
 /**
  * 
@@ -64,7 +65,16 @@ public class UserController {
 	 */
 	@RequestMapping(value={"/store"}, method = RequestMethod.POST)
 	public String store(ModelMap m, User user, HttpServletRequest request) {
+		
 			user.setStatus("1");
+			
+			System.out.println(user.getDob());
+			System.out.println(new java.sql.Timestamp(MyDateUtils.getDate(user.getDob()).getTime()));
+			
+			
+			//user.setDob(MyDateUtils.getDay());
+			
+			
 			
 		try {
 			

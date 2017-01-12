@@ -22,7 +22,7 @@ public class User implements UserDetails{
 	
 	private String phone;
 	private String gender;
-	private Date dob;
+	private String dob;
 	private String thumnail;
 	
 	private String status;
@@ -160,11 +160,11 @@ public class User implements UserDetails{
 		this.gender = gender;
 	}
 
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 
