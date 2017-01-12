@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
@@ -52,9 +53,9 @@ public class UserDaoIml implements UserDao{
 				user.setDob(			rs.getString("dob")				);
 				user.setThumnail(		rs.getString("thumnail")		);
 				user.setStatus(			rs.getString("status")			);
-				user.setApprovedDate(	rs.getDate("approved_date")		);
-				user.setCreatedDate(	rs.getDate("created_date")		);
-				user.setUpdatedDate(	rs.getDate("updated_date")		);
+				user.setApprovedDate(	rs.getString("approved_date")		);
+				user.setCreatedDate(	rs.getString("created_date")		);
+				user.setUpdatedDate(	rs.getString("updated_date")		);
 				user.setRoles(this.findUserRoleByUserId(user.getId())	);
 				return user;
 			}
@@ -132,9 +133,9 @@ public class UserDaoIml implements UserDao{
 				u.setDob(			rs.getString("dob")			);
 				u.setThumnail(		rs.getString("thumnail")	);
 				u.setStatus(		rs.getString("status")		);
-				u.setApprovedDate(	rs.getDate("approved_date")	);
-				u.setCreatedDate(	rs.getDate("created_date")	);
-				u.setUpdatedDate(	rs.getDate("updated_date")	);
+				u.setApprovedDate(	rs.getString("approved_date")	);
+				u.setCreatedDate(	rs.getString("created_date")	);
+				u.setUpdatedDate(	rs.getString("updated_date")	);
 				users.add(u);
 			}
 			return users;
@@ -170,9 +171,9 @@ public class UserDaoIml implements UserDao{
 				user.setDob(			rs.getString("dob")				);
 				user.setThumnail(		rs.getString("thumnail")		);
 				user.setStatus(			rs.getString("status")			);
-				user.setApprovedDate(	rs.getDate("approved_date")		);
-				user.setCreatedDate(	rs.getDate("created_date")		);
-				user.setUpdatedDate(	rs.getDate("updated_date")		);
+				user.setApprovedDate(	rs.getString("approved_date")		);
+				user.setCreatedDate(	rs.getString("created_date")		);
+				user.setUpdatedDate(	rs.getString("updated_date")		);
 				return user;
 			}
 		} catch (SQLException e) {
@@ -191,7 +192,7 @@ public class UserDaoIml implements UserDao{
 	public boolean insert(User user) {
 		
 		String sql = "INSERT INTO tbl_user (user_name, email, password, phone , gender, dob , thumnail, status, created_date)"
-				+" VALUES(?,?,?,?,?,?,?) ";
+				+" VALUES(?,?,?,?,?,?,?,?,?) ";
 
 		try {
 			con = dataSource.getConnection();
@@ -202,7 +203,7 @@ public class UserDaoIml implements UserDao{
 			ps.setString(3, user.getPassword());
 			ps.setString(4, user.getPhone());
 			ps.setString(5, user.getGender());
-			ps.setTimestamp(6, new java.sql.Timestamp(MyDateUtils.getDate(user.getDob()).getTime()));
+			ps.setTimestamp(6, new java.sql.Timestamp(MyDateUtils.convertStringToDate(user.getDob()).getTime()));
 			ps.setString(7, user.getThumnail());
 			ps.setString(8, user.getStatus());
 			ps.setTimestamp(9, new java.sql.Timestamp(MyDateUtils.today().getTime()));
@@ -212,6 +213,8 @@ public class UserDaoIml implements UserDao{
 			}
 
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -315,9 +318,9 @@ public class UserDaoIml implements UserDao{
 				u.setDob(			rs.getString("dob")			);
 				u.setThumnail(		rs.getString("thumnail")	);
 				u.setStatus(		rs.getString("status")		);
-				u.setApprovedDate(	rs.getDate("approved_date")	);
-				u.setCreatedDate(	rs.getDate("created_date")	);
-				u.setUpdatedDate(	rs.getDate("updated_date")	);
+				u.setApprovedDate(	rs.getString("approved_date")	);
+				u.setCreatedDate(	rs.getString("created_date")	);
+				u.setUpdatedDate(	rs.getString("updated_date")	);
 				users.add(u);
 			}
 			return users;

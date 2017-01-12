@@ -1,8 +1,8 @@
 package com.spring.app.entities;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -26,9 +26,9 @@ public class User implements UserDetails{
 	private String thumnail;
 	
 	private String status;
-	private Date approvedDate;
-	private Date createdDate;
-	private Date updatedDate;
+	private String approvedDate;
+	private String createdDate;
+	private String updatedDate;
 	
 	private List<UserRole> roles;
 	private boolean accountNonExpired = true;
@@ -52,27 +52,27 @@ public class User implements UserDetails{
 		this.email = email;
 	}
 
-	public Date getApprovedDate() {
+	public String getApprovedDate() {
 		return approvedDate;
 	}
 
-	public void setApprovedDate(Date approvedDate) {
+	public void setApprovedDate(String approvedDate) {
 		this.approvedDate = approvedDate;
 	}
 
-	public Date getCreatedDate() {
+	public String getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public Date getUpdatedDate() {
+	public String getUpdatedDate() {
 		return updatedDate;
 	}
 
-	public void setUpdatedDate(Date updatedDate) {
+	public void setUpdatedDate(String updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 

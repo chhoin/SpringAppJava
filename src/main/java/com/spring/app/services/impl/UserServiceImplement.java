@@ -10,6 +10,7 @@ import com.spring.app.entities.Pagination;
 import com.spring.app.entities.User;
 import com.spring.app.repositories.dao.UserDao;
 import com.spring.app.services.ser.UserService;
+import com.spring.app.utilities.MyDateUtils;
 
 /**
  * 
@@ -36,6 +37,9 @@ public class UserServiceImplement implements UserService{
 	}
 
 	public boolean insert(User user) {
+		user.setStatus("1");
+		user.setDob(user.getDob() + MyDateUtils.getHourMinuteSecond());
+		user.setThumnail("default.png");
 		return userDao.insert(user);
 	}
 

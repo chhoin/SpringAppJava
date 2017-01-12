@@ -1384,4 +1384,18 @@ public class MyDateUtils {
 			return new GregorianCalendar(year, 2, n);
 		}
 	}
+	
+	public static String getHourMinuteSecond() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(MyDateUtils.today());
+		int hours = calendar.get(Calendar.HOUR_OF_DAY);
+		int minutes = calendar.get(Calendar.MINUTE);
+		int seconds = calendar.get(Calendar.SECOND);
+		return " "+hours +":"+ minutes +":"+ seconds +" UTC";
+	}
+	
+	public static Date convertStringToDate(String stringDate) throws ParseException {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return format.parse(stringDate);
+	}
 }

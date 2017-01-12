@@ -66,15 +66,6 @@ public class UserController {
 	@RequestMapping(value={"/store"}, method = RequestMethod.POST)
 	public String store(ModelMap m, User user, HttpServletRequest request) {
 		
-			user.setStatus("1");
-			
-			System.out.println(user.getDob());
-			System.out.println(new java.sql.Timestamp(MyDateUtils.getDate(user.getDob()).getTime()));
-			
-			
-			//user.setDob(MyDateUtils.getDay());
-			
-			
 			
 		try {
 			

@@ -2,7 +2,10 @@ package com.spring.app.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+
+import com.spring.app.utilities.MyDateUtils;
 
 public class TestDate {
 
@@ -12,6 +15,15 @@ public class TestDate {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date  parsed = format.parse(dt);
 		System.out.println(parsed);
+		
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(MyDateUtils.today());
+		int hours = calendar.get(Calendar.HOUR_OF_DAY);
+		int minutes = calendar.get(Calendar.MINUTE);
+		int seconds = calendar.get(Calendar.SECOND);
+		
+		System.out.println(hours +":"+ minutes +":"+ seconds +" UTC");
 
 	}
 
