@@ -53,13 +53,14 @@
 						  <div class="row" id="content-body">
 								
 								<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="padding-left: 50px">
-									<a href="/en/status/create" class="btn btn-success">Add Status</a>
+									<a href="${pageContext.request.contextPath}/admin/user/create" class="btn btn-success">Add Status</a>
 								</div>
 								
 								<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
 									<div class="form-group">
-									  <select id="limitplaylist" onclick="chooseStatus();" class="form-control">
-										<option value="5" selected="selected">5</option>
+									  <select id="limitplaylist" onclick="chooseUser();" class="form-control">
+									  <option value="2" selected="selected">2</option>
+										<option value="5">5</option>
 										<option value="20">20</option>
 										<option value="30">30</option>
 										<option value="50">50</option>
@@ -74,7 +75,7 @@
 												<div class="input-group col-sm-12 col-xs-12">
 													<input type="text" name="txtSearch" id="search" class="form-control" placeholder="Search title">
 													<div class="input-group-btn">
-														<button type="button" class="btn btn-default" id="btnSearch" onclick="searchStatus()"><i><span class="glyphicon glyphicon-search"></i></button>
+														<button type="button" class="btn btn-default" id="btnSearch" onclick="searchUser()"><i><span class="glyphicon glyphicon-search"></i></button>
 													</div><!-- /itnput-group-btn -->
 												</div>	<!-- /input-group -->			
 											</div><!-- /form-group -->
@@ -120,26 +121,40 @@
 		<!-- END CONTAINER fluid-->
 		
 		<!-- Modal -->
-	  <div class="modal fade" id="myModal" role="dialog">
-	    <div class="modal-dialog modal-lg">
+	   <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog modal-md">
 	      <div class="modal-content">
-	        <div class="modal-header">
-	         
-	         <header class="panel_header">
-				<h2 class="title pull-left">Dashboad | Status</h2>
-			 </header>
-	        </div>
-	        <div class="modal-body">
-         		Id: <span id="viewId"></span><br/>
-         		Title: <span id="viewTitle"></span><br/>
-         		Status: <span id="viewStatus"></span><br/>
-         		Author: <span id="viewAuthor"></span><br/>
-         		Created: <span id="viewCreate"></span><br/>
-         		Updated: <span id="viewUpdate"></span><br/>
-	        </div>
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        </div>
+		        <div class="modal-header" style="background-color: #4ee499; border-bottom: 7px solid rgba(31, 181, 172, 1.0);">
+		          <h4 class="modal-title">View</h4>
+		        </div>
+		        
+		        <div class="modal-body">
+		        	<div class="row">
+		        		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+					          Id: <span id="viewId"></span><br/>
+					          User Name: <span id="viewName"></span><br/>
+					          Email: <span id="viewEmail"></span><br/>
+					          Phone: <span id="viewPhone"></span><br/>
+					          Gender: <span id="viewGender"></span><br/>
+					          Date of Birth: <span id="viewDob"></span><br/>
+					          Status: <span id="viewStatus"></span><br/>
+					          Approved Date: <span id="viewApprove"></span><br/>
+					          Create Date: <span id="viewCreate"></span><br/>
+					          Update Date: <span id="viewUpdate"></span><br/>
+		        		</div>
+		        		
+		        		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+		        			<span id="viewProfile"></span>
+		        		</div>
+		        	</div>
+		        
+		        
+		         
+		        </div>
+		        
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+		        </div>
 	      </div>
 	    </div>
 	  </div>
@@ -167,12 +182,12 @@
 		/**
 		* choice for you search or list
 		**/
-		function chooseStatus() {
+		function chooseUser() {
 			var key =$("#search").val();
 			if(key.length == 0){
 				mystart();
 			}else{
-				searchStatus();
+				searchUser();
 			}
 		} 
 		
@@ -184,14 +199,14 @@
 			limit = $("#limitplaylist").val();
 			//alert(limit);
 			$.ajax({   
-		            url 		: 	'${pageContext.request.contextPath}/admin/user/all/page/'+offset+'/item/'+limit,
+		            url 		: 	url+'/admin/user/all/page/'+offset+'/item/'+limit,
 		            type 		: 	'get',
 		            contentType	: 	'application/json;charset=utf-8',
 		            success 	: 	 function(data) {
 		            	if(data.STATUS == true) {
 		            		totalofrecord	=	data.PAGINATION.totalRecord;
 			            	numofpage		=	data.PAGINATION.totalPage;
-			            	listAllStatus(1);
+			            	listAllUser(1);
 			            	loadPaginationStatus();
 			            }
 		            },
@@ -220,21 +235,21 @@
 		        lastClass 	: 'last',
 		        firstClass 	: 'first'
 		    }).on("page", function(event, num) {
-		    	listAllStatus(num);
+		    	listAllUser(num);
 		    }); 
 		}
 		
 		/*
-		* listAllStatus
+		* listAllUser
 		*/
-		function listAllStatus(offset) {
+		function listAllUser(offset) {
 	    	$.ajax({
 	    		url 		: url+'/admin/user/all/page/'+offset+'/item/'+limit,
 	            type 		: 'get',
 	            contentType : 'application/json;charset=utf-8',
 	            success 	: function(data) {
 				            	if(data.STATUS == true) {
-				            		$("tbody").html(listStatusDetail(data));
+				            		$("tbody").html(listUserDetail(data));
 				            	}
 	            },
 	            error 		: function(data) {
@@ -246,7 +261,7 @@
 		/*
 		* list Status detail
 		*/
-		function listStatusDetail(data) {
+		function listUserDetail(data) {
 			var status = "";
 			var str="";
 				for(var i=0; i<data.DATA.length ; i++) {
@@ -270,16 +285,57 @@
 							+"<td>"+data.DATA[i].createdDate+"</td>"
 							+"<td>"+data.DATA[i].updatedDate+"</td>"
 							+"<td>"
-								+"<a title='view status' data-toggle='modal' data-target='#myModal' onclick=viewStatus('"+data.DATA[i].id+"') class='btn btn-primary'>View</a> &nbsp;"
-								+"<a title='edit status'  href='"+url+'/json/status/edit/'+data.DATA[i].id+"' class='btn btn-success'>Edit</a> &nbsp;"              
-								+"<a title='delete playlist'  onclick=deleteStatus('"+data.DATA[i].id+"') class='btn btn-danger'>Delete</a> &nbsp;"    
+								+"<a title='view status' data-toggle='modal' data-target='#myModal' onclick=viewUser('"+data.DATA[i].id+"') class='btn btn-primary'>View</a> &nbsp;"
+								+"<a title='edit status'  href='"+url+'/admin/user/edit/'+data.DATA[i].id+"' class='btn btn-success'>Edit</a> &nbsp;"              
+								+"<a title='delete playlist'  onclick=deleteUser('"+data.DATA[i].id+"') class='btn btn-danger'>Delete</a> &nbsp;"    
 							+"<td>"
 						+"</tr>" ;
 				}
 			return str;
 		}
 		
-		function deleteStatus(id){
+		/*
+	    *use to view status
+	    */
+	    function viewUser(id) {
+	    	var status = "";
+	    	 $.ajax({  
+                    url 	: url+'/admin/user/show/'+id,
+                    type 	:'get',
+                    contentType: 'application/json;charset=utf-8', 
+                    success : function(data) { 
+                            if(data.STATUS ==  true ) {
+                            	
+                            	if (data.DATA.status == 2) {
+            						status = "Delete";
+            					}else if(data.DATA.status == 3) {
+            						status = "Pendding";
+            					} else  {
+            						status = "Active";
+            					}
+                            	
+                            	$("#viewId").text(data.DATA.id);
+                            	$("#viewName").text(data.DATA.username);
+                            	$("#viewEmail").text(data.DATA.email);
+                            	$("#viewPhone").text(data.DATA.phone);
+                            	$("#viewGender").text(data.DATA.gender);
+                            	$("#viewDob").text(data.DATA.dob);
+                            	$("#viewStatus").text(status);
+                            	$("#viewApprove").text(data.DATA.approvedDate);
+                            	$("#viewCreate").text(data.DATA.createdDate);
+                            	$("#viewUpdate").text(data.DATA.updatedDate);
+                            	
+                            	var profile = "<img alt='profile' src='${pageContext.request.contextPath}/resources/images/user/"+data.DATA.thumnail+"' class='img-responsive'> ";
+                            	$("#viewProfile").html(profile);
+                            }
+                       }  ,  
+                            error: function(data) {
+                            console.log("ERROR..." + JSON.stringify(data));
+                    }
+                });  
+	    }
+		
+		function deleteUser(id){
 			swal({
 			  title 			: 'Are you sure?',
 			  text 				: "You won't be able to revert this!",
@@ -311,28 +367,36 @@
 			})
 	    }
 		
-		function searchStatus() {
+		function searchUser() {
 	        key 	= $('#search').val();
 	        limit 	= $("#limitplaylist").val();
-	        $.ajax({
-	            url 		: url+'/admin/user/search/page/'+ offset +'/item/'+ limit + '/' + key,
-	            type 		: 'get',
-	            contentType : 'application/json;charset=utf-8', 
-	            success 	: function( data ) {
-	                if( data.STATUS == true ){
-	                    numofpage = data.PAGINATION.TOTALPAGE;
-	                    $("tbody").html(listStatusDetail(data));
-	                    loadPaginationStatus();
+	        
+	        /**
+	        *if string search is empty sould be go to list
+	        **/
+	        if (key.length == 0 ){
+	        	mystart();
+	        } else {
+	        	$.ajax({
+		            url 		: url+'/admin/user/search/page/'+ offset +'/item/'+ limit + '/' + key,
+		            type 		: 'get',
+		            contentType : 'application/json;charset=utf-8', 
+		            success 	: function( data ) {
+		                if( data.STATUS == true ){
+		                    numofpage = data.PAGINATION.totalPage;
+		                    $("tbody").html(listUserDetail(data));
+		                    loadPaginationStatus();
 
-	            } else {
-	                    $('tbody').html('<h2>Search Not Found</h2>');
-	                    $('#pagination').html('');
-	            }
-	        },
-	        error: function( data ) {
-	            console.log("ERROR..." + JSON.stringify(data));
+		            } else {
+		                    $('tbody').html('<h2>Search Not Found</h2>');
+		                    $('#pagination').html('');
+		            }
+		        },
+		        error: function( data ) {
+		            console.log("ERROR..." + JSON.stringify(data));
+		        	}
+		        });
 	        }
-	        });
 	}
 		
 	</script>

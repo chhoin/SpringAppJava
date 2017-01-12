@@ -64,7 +64,8 @@ public class UserController {
 	 */
 	@RequestMapping(value={"/store"}, method = RequestMethod.POST)
 	public String store(ModelMap m, User user, HttpServletRequest request) {
-		
+			user.setStatus("1");
+			
 		try {
 			
 			if (userService.insert(user)) {
@@ -214,7 +215,7 @@ public class UserController {
 			
 			user = userService.getUser(page);
 
-			if (!user.isEmpty()) {
+			if (user != null && !user.isEmpty()) {
 				
 				map.put("STATUS"		, 	true);
 				map.put("MESSAGE"		, 	"RECORD FOUND");
