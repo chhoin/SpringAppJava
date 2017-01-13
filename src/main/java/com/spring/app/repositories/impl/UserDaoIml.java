@@ -295,7 +295,9 @@ public class UserDaoIml implements UserDao{
 		ArrayList<User> users =new ArrayList<User>();
 		String sql = "SELECT id, user_name, email, password, phone, gender, dob, thumnail, status, approved_date, created_date, updated_date"
 				   + " FROM tbl_user"
-				   + " WHERE LOWER(user_name) LIKE LOWER(?)"
+				   +" WHERE LOWER(user_name) LIKE LOWER(?)"
+				   +" OR LOWER(email) LIKE LOWER(?)"
+				   +" OR LOWER(phone) LIKE LOWER(?)"
 				   + " ORDER BY id DESC"
 				   + " OFFSET ? LIMIT ? ";
 		
@@ -305,8 +307,10 @@ public class UserDaoIml implements UserDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			
 			ps.setString(1, "%"+kesearch+"%");
-			ps.setLong(2, new Double(pagin.getBegin()).longValue());
-			ps.setLong(3,  new Double(pagin.getItem()).longValue());
+			ps.setString(2, "%"+kesearch+"%");
+			ps.setString(3, "%"+kesearch+"%");
+			ps.setLong(4, new Double(pagin.getBegin()).longValue());
+			ps.setLong(5,  new Double(pagin.getItem()).longValue());
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
@@ -367,7 +371,10 @@ public class UserDaoIml implements UserDao{
 
 	public Long countSearch(String keyword) {
 		Long count = 0L;
-		String sql = "SELECT COUNT(id) FROM tbl_user WHERE LOWER(user_name) LIKE LOWER(?)";
+		String sql = "SELECT COUNT(id) FROM tbl_user" 
+					 +" WHERE LOWER(user_name) LIKE LOWER(?)"
+					 +" OR LOWER(email) LIKE LOWER(?)"
+					 +" OR LOWER(phone) LIKE LOWER(?)";
 
 		try {
 			// con = com.spring.app.test.Connection.getConnection();
@@ -375,6 +382,8 @@ public class UserDaoIml implements UserDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 
 			ps.setString(1, "%" + keyword + "%");
+			ps.setString(2, "%" + keyword + "%");
+			ps.setString(3, "%" + keyword + "%");
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
