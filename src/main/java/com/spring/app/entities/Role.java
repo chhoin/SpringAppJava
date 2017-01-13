@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
  * @author sok.kimchhoin
  *
  */
-public class UserRole implements GrantedAuthority{
+public class Role implements GrantedAuthority{
 
 	private static final long serialVersionUID = -4986854255929832643L;
 	

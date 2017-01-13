@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.spring.app.common.UserStatus;
 import com.spring.app.entities.Pagination;
 import com.spring.app.entities.User;
-import com.spring.app.entities.UserRole;
+import com.spring.app.entities.Role;
 import com.spring.app.repositories.dao.UserDao;
 import com.spring.app.utilities.MyDateUtils;
 
@@ -76,8 +76,8 @@ public class UserDaoIml implements UserDao{
 	 * @param id
 	 * @return
 	 */
-	public List<UserRole> findUserRoleByUserId(Long id) {
-		List<UserRole> roles = new ArrayList<UserRole>();
+	public List<Role> findUserRoleByUserId(Long id) {
+		List<Role> roles = new ArrayList<Role>();
 		String sql = "SELECT tbl_role.id , tbl_role.role_name FROM tbl_user "
 				+ "LEFT JOIN tbl_user_role ON tbl_user.id = tbl_user_role.user_id "
 				+ "LEFT JOIN tbl_role ON tbl_role.id = tbl_user_role.role_id WHERE tbl_user.id = ?";
@@ -88,7 +88,7 @@ public class UserDaoIml implements UserDao{
 			ps.setLong(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				UserRole role = new UserRole();
+				Role role = new Role();
 				role.setId(rs.getInt("id"));
 				role.setName("ROLE_" + rs.getString("role_name"));
 				roles.add(role);

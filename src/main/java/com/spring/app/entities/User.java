@@ -32,7 +32,7 @@ public class User implements UserDetails{
 	private String createdDate;
 	private String updatedDate;
 	
-	private List<UserRole> roles;
+	private List<Role> roles;
 	private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;
@@ -78,11 +78,11 @@ public class User implements UserDetails{
 		this.updatedDate = updatedDate;
 	}
 
-	public List<UserRole> getRoles() {
+	public List<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<UserRole> roles) {
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 
