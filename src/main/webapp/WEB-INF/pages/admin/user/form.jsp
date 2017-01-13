@@ -45,74 +45,124 @@
 					<div class="content-body">
 						<section class="box ">
 								<header class="panel_header">
-									<h2 class="title pull-left">Form </h2>
+									<h2 class="title pull-left">${title}</h2>
 								</header>
 						
 							<br/>
 							<br/>
 						
 						  <div class="row" id="content-body">
+						  	
 						  	<!---------------START FORM-------------->
-							<form  class="form-horizontal" action="<%= request.getContextPath()%>/admin/user/store" method="post" role="form" id="myform">
+							<form  class="form-horizontal" action="<%= request.getContextPath()%>/admin/user/${action}" method="post" role="form" id="myform" enctype="multipart/form-data">
+								
+								<div class="col-xs-12">
+									<p class="text-center">${message}</p>
+								</div>
+								
 								<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 								
 									<div class="form-group">
 										<label class="col-sm-3 control-label">User Name</label>
 										<div class="col-sm-9">
-											<input type="text" name="username" id="username" value="" class="form-control" placeholder="User Name" required>
+											<input type="text" name="username" id="username" value="${user.username }" class="form-control" placeholder="User Name" required>
 										</div>
 									</div>
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Email</label>
 										<div class="col-sm-9">
-											<input type="email" name="email" id="email" value="" class="form-control" placeholder="Email" required>
+											<input type="email" name="email" id="email" value="${user.email }" class="form-control" placeholder="Email" required>
 										</div>
 									</div>
 									
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Password</label>
-										<div class="col-sm-9">
-											<input type="password" name="password" id="password" value="" class="form-control" placeholder="password" required>
+									<!-- START PASSWORD -->
+									<c:if test="${not edit}">
+										<div class="form-group">
+											<label class="col-sm-3 control-label">Password</label>
+											<div class="col-sm-9">
+												<input type="password" name="password" id="password" value="" class="form-control" placeholder="password" required>
+											</div>
 										</div>
-									</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label">Confirm Password</label>
+											<div class="col-sm-9">
+												<input type="password" name=""confirm"" id="confirm" value="" class="form-control" placeholder="Confirm Password" required>
+											</div>
+										</div>
+									</c:if>
 									
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Confirm Password</label>
-										<div class="col-sm-9">
-											<input type="password" name=""confirm"" id="confirm" value="" class="form-control" placeholder="Confirm Password" required>
-										</div>
-									</div>
+									<!-- START PASSWORD -->
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Phone</label>
 										<div class="col-sm-9">
-											<input type="number" name="phone" id="phone" value="" class="form-control" placeholder="phone" >
+											<input type="text" name="phone" id="phone" value="${user.phone }" class="form-control" placeholder="phone" >
 										</div>
 									</div>
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Gender</label>
 										<div class="col-sm-9">
-											<label class="radio-inline"><input type="radio" name="gender" value="MALE" checked>Male</label>
-											<label class="radio-inline"><input type="radio" name="gender" value="FEMALE">Female</label>
+										<c:choose>
+												<c:when test="${user.gender == 'MALE' }">
+													<label class="radio-inline"><input type="radio" name="gender" value="MALE" checked>Male</label>
+													<label class="radio-inline"><input type="radio" name="gender" value="FEMALE">Female</label>
+												</c:when>
+												<c:otherwise>
+													<label class="radio-inline"><input type="radio" name="gender" value="MALE" >Male</label>
+													<label class="radio-inline"><input type="radio" name="gender" value="FEMALE" checked>Female</label>
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</div>
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Date Of Birth</label>
 										<div class="col-sm-9">
-											<input type="date" name="dob" id="dob" value="" class="form-control" placeholder="dob" >
+											<input type="date" name="dob" id="dob" value="${user.dobDate }" class="form-control" placeholder="dob" >
 										</div>
 									</div>
+									
+									<c:if test="${edit}">
+										<div class="form-group">
+											<label class="col-sm-3 control-label">Status</label>
+											<div class="col-sm-9">
+												<select name="status" class="form-control">
+													<c:forEach items="${status }" var="status">
+														<c:choose>
+															<c:when test="${user.status == status.value}">
+																<option value="${status.value }" selected>${status.title }</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${status.value }">${status.title }</option>
+															</c:otherwise>
+														</c:choose>
+													
+													</c:forEach>
+												</select>
+											</div>
+										</div>
+									</c:if>
 									
 									
 									<div class="form-group">
 										<label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">Action</label>
 										<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-											<button type="submit" class="btn btn-success" id="btnSave">Save</button>
-											<button type="button" class="btn btn-warning"​ onclick="clearForm()">Clear</button>
-											<a href="<%= request.getContextPath()%>/admin/user/index" type="button" class="btn btn-danger">Back</a>
+											<c:choose>
+													<c:when test="${edit}">
+														<input type="hidden" name="id" value="${user.id }"/>
+														<input type="hidden" name="thumnail" value="${user.thumnail }"/>
+														<input type="submit" value="Update" class="btn btn-success"/>
+													</c:when>
+													<c:otherwise>
+														<input type="submit" value="Add" class="btn btn-success" />
+													</c:otherwise>
+												</c:choose>
+											
+												<button type="button" class="btn btn-warning"​ onclick="clearForm()">Clear</button>
+												<a href="<%= request.getContextPath()%>/admin/user/index" type="button" class="btn btn-danger">Back</a>
 										</div>
 									</div>
 								
@@ -121,7 +171,15 @@
 								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 				        			<div class="fileinput fileinput-new" data-provides="fileinput">
 										  <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-										    	<img data-src="holder.js/100%x100%" alt="">
+										  		<c:choose>
+													<c:when test="${empty user.thumnail }">
+														<img data-src="holder.js/100%x100%" alt="">
+													</c:when>
+													<c:otherwise>
+														<img data-src="holder.js/100%x100%" src="<%= request.getContextPath()%>/resources/images/user/${user.thumnail }">
+													</c:otherwise>
+												</c:choose>
+										    	
 										  </div>
 									  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
 									  <div>
@@ -136,7 +194,57 @@
 							
 						  </div><!-- /row -->
 						 </section>
-  
+						 
+					<!-- IF UPDATE ALLOW TO SEE -->
+					<c:if test="${edit}">
+						<div class="content-body">
+						<section class="box ">
+								<header class="panel_header">
+									<h2 class="title pull-left">PASSWORD </h2>
+								</header>
+						
+							<br/>
+							<br/>
+							  <div class="row" id="content-body">
+							  		<div class="col-xs-12">
+							  		
+							  			<div class="form-group">
+											<label class="col-sm-3 control-label">Old Password</label>
+											<div class="col-sm-9">
+												<input type="password" name="password" id="password" value="" class="form-control" placeholder="Old password" required>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label">New Password</label>
+											<div class="col-sm-9">
+												<input type="password" name="password" id="password" value="" class="form-control" placeholder="New password" required>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label">Confirm Password</label>
+											<div class="col-sm-9">
+												<input type="password" name=""confirm"" id="confirm" value="" class="form-control" placeholder="Confirm Password" required>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">Action</label>
+											<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+												<input type="hidden" name="id" value="${user.id }"/>
+												<input type="submit" value="Update" class="btn btn-success" />
+												<a href="<%= request.getContextPath()%>/admin/user/index" type="button" class="btn btn-danger">Back</a>
+											</div>
+										</div>
+									
+							  		</div>
+							  </div>
+							</section>
+						</div>
+					</c:if>
+					<!-- END IF UPDATE ALLOW TO SEE -->
+						
 					</div>
                 </section>
             </section>

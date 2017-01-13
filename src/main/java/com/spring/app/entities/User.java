@@ -1,6 +1,7 @@
 package com.spring.app.entities;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -23,6 +24,7 @@ public class User implements UserDetails{
 	private String phone;
 	private String gender;
 	private String dob;
+	private Date   dobDate;
 	private String thumnail;
 	
 	private String status;
@@ -174,6 +176,14 @@ public class User implements UserDetails{
 
 	public void setThumnail(String thumnail) {
 		this.thumnail = thumnail;
+	}
+
+	public Date getDobDate() {
+		return dobDate;
+	}
+
+	public void setDobDate(Date dobDate) {
+		this.dobDate = dobDate;
 	}
 	
 	

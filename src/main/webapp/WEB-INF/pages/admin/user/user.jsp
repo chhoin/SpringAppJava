@@ -44,7 +44,7 @@
 					<div class="content-body">
 						<section class="box ">
 								<header class="panel_header">
-									<h2 class="title pull-left">Dashboad | Status</h2>
+									<h2 class="title pull-left">Dashboad | User</h2>
 								</header>
 						
 							<br/>
@@ -59,8 +59,7 @@
 								<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
 									<div class="form-group">
 									  <select id="limitplaylist" onclick="chooseUser();" class="form-control">
-									  <option value="2" selected="selected">2</option>
-										<option value="5">5</option>
+										<option value="10"  selected="selected">10</option>
 										<option value="20">20</option>
 										<option value="30">30</option>
 										<option value="50">50</option>

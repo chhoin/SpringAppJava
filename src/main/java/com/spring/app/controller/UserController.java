@@ -1,9 +1,12 @@
 package com.spring.app.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +15,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.spring.app.common.UserStatus;
 import com.spring.app.entities.Pagination;
+import com.spring.app.entities.Status;
 import com.spring.app.entities.User;
 import com.spring.app.services.ser.UserService;
-import com.spring.app.utilities.MyDateUtils;
 
 /**
  * 
@@ -71,17 +76,17 @@ public class UserController {
 			
 			if (userService.insert(user)) {
 				m.addAttribute("title"		,	"Add User" )
-				 .addAttribute("message"	,	"Success")
+				 .addAttribute("message"	,	"<div class='alert alert-success'> <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Intert Success</strong>. </div>")
 				 .addAttribute("action"		,	"store")
 				 .addAttribute("edit"		,	false)
-				 .addAttribute("student"	,	new User());
+				 .addAttribute("user"		,	new User());
 				
 			} else {
 				m.addAttribute("title"		,	"Add User" )
-				.addAttribute("message"		,	"Fail!")
+				.addAttribute("message"		,	"<div class='alert alert-danger'> <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Intert Fail!</strong>. </div>")
 				 .addAttribute("action"		,	"store")
 				 .addAttribute("edit"		,	false)
-				 .addAttribute("student", user);
+				 .addAttribute("user"		, 	user);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -128,11 +133,17 @@ public class UserController {
 	@RequestMapping(value="/edit/{id}", method = RequestMethod.GET)
 	public String edit(ModelMap m, @PathVariable("id") String id) {
 		
+		ArrayList<Status> status = new ArrayList<Status>();
+		status.add(new Status(UserStatus.ACTIVE, "Active"));
+		status.add(new Status(UserStatus.DELETE, "Delete"));
+		status.add(new Status(UserStatus.PENDING, "Pending"));
+		
 		m.addAttribute("title"		,	"Update User" )
 		 .addAttribute("message"	,	"")
 		 .addAttribute("action"		,	"update")
 		 .addAttribute("edit"		, 	true)
-		 .addAttribute("student"	,	userService.detail(Long.parseLong(id)));
+		 .addAttribute("user"		,	userService.detail(Long.parseLong(id)))
+		 .addAttribute("status"		, 	status);
 		
 		return "/admin/user/form";
 	}
@@ -146,21 +157,29 @@ public class UserController {
 	 */
 	@RequestMapping(value={"/update"}, method = RequestMethod.POST)
 	public String update(ModelMap m, User user, HttpServletRequest request) {
+		
+		ArrayList<Status> status = new ArrayList<Status>();
+		status.add(new Status(UserStatus.ACTIVE, "Active"));
+		status.add(new Status(UserStatus.DELETE, "Delete"));
+		status.add(new Status(UserStatus.PENDING, "Pending"));
+		
 		try {
 			
 			if (userService.update(user)) {
 				m.addAttribute("title"		,	"Update User" )
-				 .addAttribute("message"	,	"Success")
+				 .addAttribute("message"	,	"<div class='alert alert-success'> <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Update Success</strong>. </div>")
 				 .addAttribute("action"		,	"update")
-				 .addAttribute("edit"		,	false)
-				 .addAttribute("student"	,	new User());
+				 .addAttribute("edit"		,	true)
+				 .addAttribute("user"		,	userService.detail(user.getId()))
+				 .addAttribute("status"		, 	status);
 				
 			} else {
 				m.addAttribute("title"		,	"Update User" )
-				.addAttribute("message"		,	"Fail!")
+				.addAttribute("message"		,	"<div class='alert alert-danger'> <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Update Fail!</strong>. </div>")
 				 .addAttribute("action"		,	"update")
-				 .addAttribute("edit"		,	false)
-				 .addAttribute("student", user);
+				 .addAttribute("edit"		,	true)
+				 .addAttribute("user"		,	userService.detail(user.getId()))
+				 .addAttribute("status"		, 	status);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

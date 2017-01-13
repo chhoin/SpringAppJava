@@ -171,9 +171,10 @@ public class UserDaoIml implements UserDao{
 				user.setDob(			rs.getString("dob")				);
 				user.setThumnail(		rs.getString("thumnail")		);
 				user.setStatus(			rs.getString("status")			);
-				user.setApprovedDate(	rs.getString("approved_date")		);
-				user.setCreatedDate(	rs.getString("created_date")		);
-				user.setUpdatedDate(	rs.getString("updated_date")		);
+				user.setApprovedDate(	rs.getString("approved_date")	);
+				user.setCreatedDate(	rs.getString("created_date")	);
+				user.setUpdatedDate(	rs.getString("updated_date")	);
+				user.setDobDate(	    rs.getDate("dob")		);
 				return user;
 			}
 		} catch (SQLException e) {
@@ -227,7 +228,7 @@ public class UserDaoIml implements UserDao{
 	}
 
 	public boolean update(User user) {
-		String sql = "UPDATE tbl_user SET user_name=?, email=?, password=?, phone=?, gender=?, dob=?, thumnail=?, status=?, updated_date=? "
+		String sql = "UPDATE tbl_user SET user_name=?, email=? , phone=?, gender=?, dob=?, thumnail=?, status=?, updated_date=? "
 					+" WHERE id=? ";
 
 		try {
@@ -236,20 +237,21 @@ public class UserDaoIml implements UserDao{
 			
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getEmail());
-			ps.setString(3, user.getPassword());
-			ps.setString(4, user.getPhone());
-			ps.setString(5, user.getGender());
-			ps.setTimestamp(6, new java.sql.Timestamp(MyDateUtils.getDate(user.getDob()).getTime()));
-			ps.setString(7, user.getThumnail());
-			ps.setString(8, user.getStatus());
-			ps.setTimestamp(9, new java.sql.Timestamp(MyDateUtils.today().getTime()));
-			ps.setLong(10, user.getId());
+			ps.setString(3, user.getPhone());
+			ps.setString(4, user.getGender());
+			ps.setTimestamp(5, new java.sql.Timestamp(MyDateUtils.convertStringToDate(user.getDob()).getTime()));
+			ps.setString(6, user.getThumnail());
+			ps.setString(7, user.getStatus());
+			ps.setTimestamp(8, new java.sql.Timestamp(MyDateUtils.today().getTime()));
+			ps.setLong(9, user.getId());
 
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
 
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
 			e.printStackTrace();
 		} finally {
 			try {
