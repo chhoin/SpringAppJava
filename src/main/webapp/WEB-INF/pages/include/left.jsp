@@ -6,12 +6,12 @@
                     <div class="profile-info row">
                         <div class="profile-image col-md-4 col-sm-4 col-xs-4">
                             <a href="#">
-                                <img src="<%= request.getContextPath()%>/resources/images/user/default.png" class='img-responsive img-circle'>
+                                <img src="<%= request.getContextPath()%>/resources/images/user/${session.thumnail}" class='img-responsive img-circle'>
                             </a>
                         </div>
                         <div class="profile-details col-md-8 col-sm-8 col-xs-8">
                             <h3>
-                                <a href="#">Admin</a>
+                                <a href="#">${session.username}</a>
                                 <!-- Available statuses: online, idle, busy, away and offline -->
                                 <span class="profile-status online"></span>
                             </h3>

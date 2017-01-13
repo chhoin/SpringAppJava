@@ -72,7 +72,7 @@
 									<form method="" action="" role="search">
 											<div class="form-group">
 												<div class="input-group col-sm-12 col-xs-12">
-													<input type="text" name="txtSearch" id="search" class="form-control" placeholder="Search title">
+													<input type="text" name="txtSearch" id="search" class="form-control" placeholder="Search UserName Email and Phone">
 													<div class="input-group-btn">
 														<button type="button" class="btn btn-default" id="btnSearch" onclick="searchUser()"><i><span class="glyphicon glyphicon-search"></i></button>
 													</div><!-- /itnput-group-btn -->
@@ -89,12 +89,12 @@
 										<thead>
 											<tr>
 												<th>ID</th>
+												<th width="10px">Profile</th>
 												<th>Name</th>
 												<th>Email</th>
 												<th>Phone</th>
 												<th>Gender</th>
 												<th>Status</th>
-												<th width="10px">Profile</th>
 												<th>Created</th>
 												<th>Updated</th>
 												<th>Action</th>
@@ -119,7 +119,7 @@
 		</div>
 		<!-- END CONTAINER fluid-->
 		
-		<!-- Modal -->
+	  <!-- Modal -->
 	   <div class="modal fade" id="myModal" role="dialog">
 	    <div class="modal-dialog modal-md">
 	      <div class="modal-content">
@@ -275,12 +275,12 @@
 
 					str +="<tr>"
 							+"<td>"+data.DATA[i].id+"</td>"
+							+"<td><img src="+url+"/resources/images/user/"+data.DATA[i].thumnail+" width='80%'/></td>"
 							+"<td>"+data.DATA[i].username+"</td>"
 							+"<td>"+data.DATA[i].email+"</td>"
 							+"<td>"+data.DATA[i].phone+"</td>"
 							+"<td>"+data.DATA[i].gender+"</td>"
 							+"<td>"+status+"</td>"
-							+"<td><img src="+url+"/resources/images/user/"+data.DATA[i].thumnail+" width='80%'/></td>"
 							+"<td>"+data.DATA[i].createdDate+"</td>"
 							+"<td>"+data.DATA[i].updatedDate+"</td>"
 							+"<td>"

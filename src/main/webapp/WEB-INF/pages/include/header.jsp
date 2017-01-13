@@ -148,14 +148,11 @@
                     <ul class="info-menu right-links list-inline list-unstyled">
                         <li class="profile">
                             <a href="#" data-toggle="dropdown" class="toggle">
-                                 <img src="<%= request.getContextPath()%>/resources/images/user/default.png" alt="user-image" class="img-circle img-inline">
-                                <span>
-                                	Admin
-									<i class="fa fa-angle-down"></i>
-								</span>
+                                 <img src="<%= request.getContextPath()%>/resources/images/user/${session.thumnail}" alt="user-image" class="img-circle img-inline">
+                                <span>${session.username}<i class="fa fa-angle-down"></i></span>
                             </a>
                             <ul class="dropdown-menu profile animated fadeIn">
-                                <li><a href="/en/user/profile"> <i class="fa fa-user"></i>Profile </a> </li>
+                                <li><a href="" data-toggle='modal' data-target='#profile' > <i class="fa fa-user"></i>Profile </a> </li>
                                 <li class="last"><a href="<%= request.getContextPath()%>/logout"><i class="fa fa-lock"></i>Logout</a></li>
                             </ul>
                         </li>
@@ -166,3 +163,43 @@
             </div>
 			<!--End Login Section-->
         </div>
+        
+      <!-- Modal for profile -->
+	   <div class="modal fade" id="profile" role="dialog">
+	    <div class="modal-dialog modal-md">
+	      <div class="modal-content">
+		        <div class="modal-header" style="background-color: #4ee499; border-bottom: 7px solid rgba(31, 181, 172, 1.0);">
+		          <h4 class="modal-title">View</h4>
+		        </div>
+		        
+		        <div class="modal-body">
+		        	<div class="row">
+		        		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+					          Id: <span>${session.id}</span><br/>
+					          User Name: <span>${session.username}</span><br/>
+					          Email: <span>${session.email}</span><br/>
+					          Phone: <span>${session.phone}</span><br/>
+					          Gender: <span>${session.gender}</span><br/>
+					          Date of Birth: <span>${session.dob}</span><br/>
+					          Status: <span>${session.status}</span><br/>
+					          Approved Date: <span>${session.approvedDate}</span><br/>
+					          Create Date: <span>${session.createdDate}</span><br/>
+					          Update Date: <span>${session.updatedDate}</span><br/>
+		        		</div>
+		        		
+		        		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+		        			<img alt='profile' src='${pageContext.request.contextPath}/resources/images/user/${session.thumnail}' class='img-responsive'>
+		        		</div>
+		        	</div>
+		        
+		        
+		         
+		        </div>
+		        
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+		        </div>
+	      </div>
+	    </div>
+	  </div>  
+       

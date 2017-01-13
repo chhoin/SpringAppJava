@@ -5,3 +5,5 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%-- isELIgnored we can use ${pageContext.request.contextPath} --%>
 <%@ page isELIgnored="false" %>
+<%-- To get user login information --%>
+<sec:authentication var="session" property="principal" />
