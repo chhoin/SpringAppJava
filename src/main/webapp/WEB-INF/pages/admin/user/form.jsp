@@ -145,16 +145,18 @@
 										</div>
 									</c:if>
 									
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Role</label>
-										<div class="col-sm-9">
-											<select name="userRole" class="form-control">
-												<c:forEach items="${role }" var="role">
-													<option value="${role.id }" selected>${role.name }</option>
-												</c:forEach>
-											</select>
+									<c:if test="${not edit}">
+										<div class="form-group">
+											<label class="col-sm-3 control-label">Role</label>
+											<div class="col-sm-9">
+												<select name="userRole" class="form-control">
+													<c:forEach items="${role }" var="role">
+														<option value="${role.id }" selected>${role.name }</option>
+													</c:forEach>
+												</select>
+											</div>
 										</div>
-									</div>
+									</c:if>
 									
 									
 									<div class="form-group">
@@ -162,7 +164,7 @@
 										<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
 											<c:choose>
 													<c:when test="${edit}">
-														<input type="hidden" name="id" value="${user.id }"/>
+														<input type="hidden" name="id" id="id" value="${user.id }"/>
 														<input type="hidden" name="thumnail" value="${user.thumnail }"/>
 														<input type="submit" value="Update" class="btn btn-success"/>
 													</c:when>
@@ -217,37 +219,30 @@
 							<br/>
 							  <div class="row" id="content-body">
 							  		<div class="col-xs-12">
-							  		
-							  			<div class="form-group">
-											<label class="col-sm-3 control-label">Old Password</label>
-											<div class="col-sm-9">
-												<input type="password" name="password" id="password" value="" class="form-control" placeholder="Old password" required>
+										<form id="formResetPass">
+											<div class="form-group">
+												<label class="col-sm-3 control-label">New Password</label>
+												<div class="col-sm-9">
+													<input type="password" name="password" id="password" value="" class="form-control" placeholder="New password" required>
+												</div>
 											</div>
-										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label">New Password</label>
-											<div class="col-sm-9">
-												<input type="password" name="password" id="password" value="" class="form-control" placeholder="New password" required>
+											
+											<div class="form-group">
+												<label class="col-sm-3 control-label">Confirm Password</label>
+												<div class="col-sm-9">
+													<input type="password" name="confirm" id="confirm" value="" class="form-control" placeholder="Confirm Password" required>
+												</div>
 											</div>
-										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 control-label">Confirm Password</label>
-											<div class="col-sm-9">
-												<input type="password" name=""confirm"" id="confirm" value="" class="form-control" placeholder="Confirm Password" required>
+											
+											<div class="form-group">
+												<label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">Action</label>
+												<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+													<input type="hidden" name="id" value="${user.id }"/>
+													<input type="button" id="btnReset" value="Update" class="btn btn-success" />
+													<a href="<%= request.getContextPath()%>/admin/user/index" type="button" class="btn btn-danger">Back</a>
+												</div>
 											</div>
-										</div>
-										
-										<div class="form-group">
-											<label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">Action</label>
-											<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-												<input type="hidden" name="id" value="${user.id }"/>
-												<input type="submit" value="Update" class="btn btn-success" />
-												<a href="<%= request.getContextPath()%>/admin/user/index" type="button" class="btn btn-danger">Back</a>
-											</div>
-										</div>
-									
+										</form>
 							  		</div>
 							  </div>
 							</section>
@@ -275,10 +270,102 @@
 		
 		<!-- OTHER JS INCLUDE END-->
 		
+		<!-- Jquery Validator --> 
+		<script  src="<%= request.getContextPath()%>/resources/assetAdmin/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script> 
+		<script  src="<%= request.getContextPath()%>/resources/assetAdmin/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+		<!-- Jquery Validator END --> 
+		
 		<script type="text/javascript">
+		$(document).ready(function(){
+			$('#btnReset').click(function(){
+				if($("#formResetPass").valid() ){	
+					
+					var userId = $('#id').val();
+					var pass = $('#password').val();
+					var url = "${pageContext.request.contextPath}";
+					 $.ajax({  
+		                    url 	: url+"/admin/user/reset/userId/"+userId+"/pass/"+pass,
+		                    type 	:'get',
+		                    contentType: 'application/json;charset=utf-8', 
+		                    success : function(data) { 
+		                            if(data.STATUS ==  true ) {
+		                            	//sweet alert
+		                            	swal({
+		                            		  title: 'Reset Passsword',
+		                            		  text: 'successfully',
+		                            		  timer: 2000
+		                            		}).then(
+		                            		  function () {},
+		                            		  // handling the promise rejection
+		                            		  function (dismiss) {
+		                            		    if (dismiss === 'timer') {
+		                            		      console.log('I was closed by the timer')
+		                            		    }
+		                            		  }
+		                            		)
+		                            	//clear reset from
+		                            	clearResetForm();
+		                            }
+		                       },  
+                            error: function(data) {
+                            console.log("ERROR..." + JSON.stringify(data));
+		                    }
+		              });  
+				}
+			});
+		});
+			
+			
+		
+		resetPassValidate();
+		function resetPassValidate(){
+			$( "#formResetPass" ).validate( {
+				rules: {
+					password: {
+						required	: true,
+						minlength	: 6
+					},
+					confirm:	{
+						required	: true,
+						minlength	: 6,
+						equalTo		: "#password"
+					}
+				},
+				messages: {
+					password: {
+						required	: "Field is require!",
+						minlength	: "Your PassWord must consist of at least 6 characters"
+					},
+					confirm: {
+						required	: "Field is require!",
+						minlength	: "Your PassWord must consist of at least 2 characters",
+						equalTo		: "Please enter the same password "
+					}
+				},
+				invalidHandler: function(event, validator) {
+	                //display error alert on form submit    
+	            },
+	            errorPlacement: function(label, element) { // render error placement for each input type   
+	                console.log(label);
+	                $('<span class="error"></span>').insertAfter(element).append(label)
+	                var parent = $(element).parent().parent('.form-group');
+	                parent.removeClass('has-success').addClass('has-error');
+	            },
+	            success: function(label, element) {
+	                var parent = $(element).parent().parent('.form-group');
+	                parent.removeClass('has-error').addClass('has-success');
+	            }
+			} );
+		}
+		
+		function clearResetForm() {
+			$('#password').val('');
+			$('#confirm').val('');
+		}
+		
 			function clearForm(){
-				$('#txtName').val('');
-				$('#txtDescription').val('');
+				//$('#txtName').val('');
+				//$('#txtDescription').val('');
 			}
 		</script>
 </body>

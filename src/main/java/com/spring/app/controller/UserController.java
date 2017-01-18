@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spring.app.common.UserStatus;
 import com.spring.app.entities.Pagination;
-import com.spring.app.entities.Role;
 import com.spring.app.entities.Status;
 import com.spring.app.entities.User;
 import com.spring.app.services.ser.RoleService;
@@ -294,6 +293,30 @@ public class UserController {
 		} catch (Exception e) {
 			map.put("STATUS"			,	 false);
 			map.put("MESSAGE"			,	 "ERROR OCCURRING!");
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/reset/userId/{userId}/pass/{pass}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public ResponseEntity<Map<String, Object>> resetUserPassByAdmin(@PathVariable("userId") String userId, @PathVariable("pass") String pass) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		try {
+			
+			if (userService.resetUserPassByAdmin(Long.valueOf(userId), pass)) {
+				
+				map.put("STATUS"		, 	true);
+				map.put("MESSAGE"		, 	"PASSWORD WAS RESETED");
+				map.put("CODE"			, 	"200");
+			} else {
+				map.put("STATUS"		,	 false);
+				map.put("MESSAGE"		, 	"PASSWORD WAS NOT RESETED");
+			}
+		} catch (Exception e) {
+			map.put("STATUS"			,	 false);
+			map.put("MESSAGE"			,	 "PASSWORD WAS NOT RESETED");
 			e.printStackTrace();
 		}
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);

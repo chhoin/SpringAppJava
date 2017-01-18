@@ -4,17 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.spring.app.entities.User;
-import com.spring.app.entities.UserRole;
 import com.spring.app.repositories.dao.UserRoleDao;
-import com.spring.app.utilities.MyDateUtils;
 
 /**
  * 

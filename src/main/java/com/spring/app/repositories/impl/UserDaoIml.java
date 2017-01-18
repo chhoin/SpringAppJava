@@ -212,11 +212,9 @@ public class UserDaoIml implements UserDao{
 			ps.setString(8, user.getStatus());
 			ps.setTimestamp(9, new java.sql.Timestamp(MyDateUtils.today().getTime()));
 			
-			ResultSet rs = ps.getGeneratedKeys();
-
 			if (ps.executeUpdate() > 0) {
-				//TODO get last record id
-				if (userRole.insert(rs.getLong(1), Long.valueOf(user.getUserRole()))) {
+				User u = this.getLastRecord();
+				if (userRole.insert(u.getId(), Long.valueOf(user.getUserRole()))) {
 					return true;
 				}
 			}
@@ -233,6 +231,49 @@ public class UserDaoIml implements UserDao{
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * This function use when create user then 
+	 * we need user id last record to insert to table user role
+	 * @return
+	 */
+	public User getLastRecord() {
+		User user = new User();
+		String sql = "SELECT id, user_name, email, password, phone, gender, dob, thumnail, status, approved_date, created_date, updated_date"
+					+" FROM tbl_user ORDER BY id DESC LIMIT 1";
+		try {
+			//con = com.spring.app.test.Connection.getConnection();
+			con = dataSource.getConnection();
+			PreparedStatement ps= con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()){
+				user.setId(				rs.getLong("id")				);
+				user.setUsername(		rs.getString("user_name")		);
+				user.setEmail(			rs.getString("email")			);
+				user.setPassword(		rs.getString("password")		);
+				user.setPhone(			rs.getString("phone")			);
+				user.setGender(			rs.getString("gender")			);
+				user.setDob(			rs.getString("dob")				);
+				user.setThumnail(		rs.getString("thumnail")		);
+				user.setStatus(			rs.getString("status")			);
+				user.setApprovedDate(	rs.getString("approved_date")	);
+				user.setCreatedDate(	rs.getString("created_date")	);
+				user.setUpdatedDate(	rs.getString("updated_date")	);
+				user.setDobDate(	    rs.getDate("dob")		);
+				return user;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e);
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	public boolean update(User user) {
@@ -410,7 +451,33 @@ public class UserDaoIml implements UserDao{
 		}
 		return count;
 	}
+
+	public boolean resetUserPassByAdmin(Long id, String pass) {
+		String sql = "UPDATE tbl_user SET password=?, updated_date=? "
+				+" WHERE id=? ";
+
+		try {
+			con = dataSource.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setString(1, pass);
+			ps.setTimestamp(2, new java.sql.Timestamp(MyDateUtils.today().getTime()));
+			ps.setLong(3, id);
 	
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
 	
-	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
 }

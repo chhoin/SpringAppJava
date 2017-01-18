@@ -174,7 +174,7 @@
 		
 		var limit=0;
 		var offset=1;
-		var totalofrecord =0;
+		//var totalofrecord =0;
 		var numofpage=1;
 		var url="${pageContext.request.contextPath}";
 
@@ -203,7 +203,7 @@
 		            contentType	: 	'application/json;charset=utf-8',
 		            success 	: 	 function(data) {
 		            	if(data.STATUS == true) {
-		            		totalofrecord	=	data.PAGINATION.totalRecord;
+		            		//totalofrecord	=	data.PAGINATION.totalRecord;
 			            	numofpage		=	data.PAGINATION.totalPage;
 			            	listAllUser(1);
 			            	loadPaginationStatus();

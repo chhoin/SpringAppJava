@@ -18,5 +18,5 @@ public interface UserService {
 	public ArrayList<User> searchUser(String kesearch, Pagination pagin);
 	public Long count();
 	public Long countSearch(String keyword);
-	
+	public boolean resetUserPassByAdmin(Long id, String pass);
 }

@@ -31,14 +31,17 @@ public class UserServiceImplement implements UserService{
 	private UserDao userDao;
 
 	public ArrayList<User> getUser(Pagination pagin) {
+		//TODO check item and pageid
 		return userDao.getUser(pagin);
 	}
 
 	public User detail(Long id) {
+		//TODO check id
 		return userDao.detail(id);
 	}
 
 	public boolean insert(User user) {
+		//TODO check object user null & empty
 		
 		//Default status 1 is active
 		user.setStatus("1");
@@ -54,6 +57,7 @@ public class UserServiceImplement implements UserService{
 	}
 
 	public boolean update(User user) {
+		//TODO check object user null & empty
 		
 		user.setDob(user.getDob() + MyDateUtils.getHourMinuteSecond());
 		
@@ -61,10 +65,12 @@ public class UserServiceImplement implements UserService{
 	}
 
 	public boolean delete(Long id) {
+		//TODO check id
 		return userDao.delete(id);
 	}
 
 	public ArrayList<User> searchUser(String kesearch, Pagination pagin) {
+		//TODO should check key , item and pageid
 		return userDao.searchUser(kesearch, pagin);
 	}
 
@@ -73,7 +79,13 @@ public class UserServiceImplement implements UserService{
 	}
 
 	public Long countSearch(String keyword) {
+		//TODO should check key
 		return userDao.countSearch(keyword);
+	}
+
+	public boolean resetUserPassByAdmin(Long id, String pass) {
+		//TODO should check id and pass
+		return userDao.resetUserPassByAdmin(id, new BCryptPasswordEncoder().encode(pass));
 	}
 
 }
