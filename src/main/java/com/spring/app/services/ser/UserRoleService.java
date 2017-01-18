@@ -1,7 +1,5 @@
 package com.spring.app.services.ser;
 
-import com.spring.app.entities.Role;
-
 /**
  * 
  * @author sok.kimchhoin
@@ -9,6 +7,6 @@ import com.spring.app.entities.Role;
  */
 public interface UserRoleService {
 	
-	public boolean insert(Role userRole);
+	public boolean insert(Long userId, Long roleId);
 	public boolean checkRole(Long userId, Long roleId);
 }

@@ -28,6 +28,9 @@ public class UserDaoIml implements UserDao{
 	@Autowired
 	DataSource dataSource;
 	Connection con;
+	
+	@Autowired
+	private UserRoleDaoIml userRole;
 
 	/**
 	 * Login with email
@@ -208,9 +211,14 @@ public class UserDaoIml implements UserDao{
 			ps.setString(7, user.getThumnail());
 			ps.setString(8, user.getStatus());
 			ps.setTimestamp(9, new java.sql.Timestamp(MyDateUtils.today().getTime()));
+			
+			ResultSet rs = ps.getGeneratedKeys();
 
 			if (ps.executeUpdate() > 0) {
-				return true;
+				//TODO get last record id
+				if (userRole.insert(rs.getLong(1), Long.valueOf(user.getUserRole()))) {
+					return true;
+				}
 			}
 
 		} catch (SQLException e) {
