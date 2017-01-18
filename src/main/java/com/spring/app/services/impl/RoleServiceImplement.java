@@ -20,7 +20,7 @@ public class RoleServiceImplement implements RoleService{
 
 	@Autowired
 	@Qualifier("RoleDaoIml")
-	RoleDao roleDao;
+	private RoleDao roleDao;
 	
 	public ArrayList<Role> all() {
 		return roleDao.all();

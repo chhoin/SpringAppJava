@@ -124,7 +124,7 @@
 											<input type="date" name="dob" id="dob" value="${user.dobDate }" class="form-control" placeholder="dob" >
 										</div>
 									</div>
-									
+									<!-- check if edit true will show status -->
 									<c:if test="${edit}">
 										<div class="form-group">
 											<label class="col-sm-3 control-label">Status</label>
@@ -139,12 +139,22 @@
 																<option value="${status.value }">${status.title }</option>
 															</c:otherwise>
 														</c:choose>
-													
 													</c:forEach>
 												</select>
 											</div>
 										</div>
 									</c:if>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Role</label>
+										<div class="col-sm-9">
+											<select name="userRole" class="form-control">
+												<c:forEach items="${role }" var="role">
+													<option value="${role.id }" selected>${role.name }</option>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
 									
 									
 									<div class="form-group">

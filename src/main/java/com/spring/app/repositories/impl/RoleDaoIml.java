@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.spring.app.entities.Role;
 import com.spring.app.repositories.dao.RoleDao;
 
@@ -29,6 +32,7 @@ public class RoleDaoIml implements RoleDao{
 		String sql = "SELECT * FROM tbl_role ";
 		
 		try {
+			//con = com.spring.app.test.testDataBase.Connection.getConnection();
 			con = dataSource.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 		

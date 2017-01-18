@@ -26,6 +26,7 @@ public class User implements UserDetails{
 	private String dob;
 	private Date   dobDate;
 	private String thumnail;
+	private String userRole;
 	
 	private String status;
 	private String approvedDate;
@@ -184,6 +185,14 @@ public class User implements UserDetails{
 
 	public void setDobDate(Date dobDate) {
 		this.dobDate = dobDate;
+	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 	
 	

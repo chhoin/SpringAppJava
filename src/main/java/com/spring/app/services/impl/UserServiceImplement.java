@@ -27,8 +27,8 @@ import com.spring.app.utilities.MyDateUtils;
 public class UserServiceImplement implements UserService{
 	
 	@Autowired
-	@Qualifier("UserDaoImpl")
-	UserDao userDao;
+	@Qualifier("UserDaoImpl") //@Qualifier is used to make clear which object that we want to autowired
+	private UserDao userDao;
 
 	public ArrayList<User> getUser(Pagination pagin) {
 		return userDao.getUser(pagin);

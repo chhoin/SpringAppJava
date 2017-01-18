@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spring.app.common.UserStatus;
 import com.spring.app.entities.Pagination;
+import com.spring.app.entities.Role;
 import com.spring.app.entities.Status;
 import com.spring.app.entities.User;
+import com.spring.app.services.ser.RoleService;
 import com.spring.app.services.ser.UserService;
 
 /**
@@ -31,7 +33,10 @@ import com.spring.app.services.ser.UserService;
 public class UserController {
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
+	
+	@Autowired
+	private RoleService roleService;
 	
 	/**
 	 * index
@@ -55,7 +60,8 @@ public class UserController {
 		 .addAttribute("message"	,	"")
 		 .addAttribute("action"		,	"store")
 		 .addAttribute("edit"		,	false)
-		 .addAttribute("student"	,	new User());
+		 .addAttribute("student"	,	new User())
+		 .addAttribute("role"		,	roleService.all());
 		
 		return "/admin/user/form";
 	}
