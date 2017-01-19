@@ -14,6 +14,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.app.common.UserStatus;
 import com.spring.app.entities.Pagination;
@@ -21,6 +23,7 @@ import com.spring.app.entities.Status;
 import com.spring.app.entities.User;
 import com.spring.app.services.ser.RoleService;
 import com.spring.app.services.ser.UserService;
+import com.spring.app.utilities.MyUploadFile;
 
 /**
  * 
@@ -73,9 +76,12 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value={"/store"}, method = RequestMethod.POST)
-	public String store(ModelMap m, User user, HttpServletRequest request) {
+	public String store(@RequestParam("image") MultipartFile image, ModelMap m, User user, HttpServletRequest request) {
 		
-			
+		if(!image.isEmpty()) {
+			user.setThumnail(MyUploadFile.UploadImage(image, request));	
+		}
+		
 		try {
 			
 			if (userService.insert(user)) {
@@ -160,12 +166,16 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value={"/update"}, method = RequestMethod.POST)
-	public String update(ModelMap m, User user, HttpServletRequest request) {
+	public String update(@RequestParam("image") MultipartFile image, ModelMap m, User user, HttpServletRequest request) {
 		
 		ArrayList<Status> status = new ArrayList<Status>();
 		status.add(new Status(UserStatus.ACTIVE, "Active"));
 		status.add(new Status(UserStatus.DELETE, "Delete"));
 		status.add(new Status(UserStatus.PENDING, "Pending"));
+		
+		if(!image.isEmpty()) {
+			user.setThumnail(MyUploadFile.UploadImage(image, request));	
+		}
 		
 		try {
 			

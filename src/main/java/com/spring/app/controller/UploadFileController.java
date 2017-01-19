@@ -25,21 +25,21 @@ import org.springframework.web.multipart.MultipartFile;
  *
  */
 @Controller
-@RequestMapping("/admin/upload")
+@RequestMapping("/test/upload")
 public class UploadFileController {
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/image", headers = "Accept=application/json")
-	public ResponseEntity<Map<String, Object>> image(@RequestParam("image") MultipartFile file, HttpServletRequest request) {
+	public ResponseEntity<Map<String, Object>> image(@RequestParam("image") MultipartFile image, HttpServletRequest request) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		String fileReturn = "";
-		String filename = file.getOriginalFilename();
+		String filename = image.getOriginalFilename();
 		
-		if(!file.isEmpty()){
+		if(!image.isEmpty()){
 			try{
 				filename = UUID.randomUUID() + filename.substring(filename.lastIndexOf("."));
 				
-				byte[] bytes = file.getBytes();
+				byte[] bytes = image.getBytes();
 				// creating the directory to store file
 				String savePath = request.getSession().getServletContext().getRealPath("/WEB-INF/resources/images/user/");
 				
