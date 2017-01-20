@@ -72,9 +72,9 @@
 									<form method="" action="" role="search">
 											<div class="form-group">
 												<div class="input-group col-sm-12 col-xs-12">
-													<input type="text" name="txtSearch" id="search" class="form-control" placeholder="Search UserName Email and Phone">
+													<input type="text" name="txtSearch" id="search" onkeyup="searchUser()" class="form-control" placeholder="Search UserName Email and Phone">
 													<div class="input-group-btn">
-														<button type="button" class="btn btn-default" id="btnSearch" onclick="searchUser()"><i><span class="glyphicon glyphicon-search"></i></button>
+														<button type="button" class="btn btn-default"  id="btnSearch" onclick="searchUser()"><i><span class="glyphicon glyphicon-search"></i></button>
 													</div><!-- /itnput-group-btn -->
 												</div>	<!-- /input-group -->			
 											</div><!-- /form-group -->

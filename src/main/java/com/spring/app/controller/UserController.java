@@ -314,8 +314,8 @@ public class UserController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		try {
-			
-			if (userService.resetUserPassByAdmin(Long.valueOf(userId), pass)) {
+			//not allow to change password admin
+			if ( !"1".equalsIgnoreCase(userId) && userService.resetUserPassByAdmin(Long.valueOf(userId), pass)) {
 				
 				map.put("STATUS"		, 	true);
 				map.put("MESSAGE"		, 	"PASSWORD WAS RESETED");
