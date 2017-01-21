@@ -37,10 +37,17 @@ public class UploadFileController {
 	 * @return
 	 */
 	@RequestMapping(value={"/index"}, method = RequestMethod.GET)
-	public String index(ModelMap m) {
+	public String index() {
 		return "/admin/image/main";
 	}
 	
+	/**
+	 * image
+	 * @param m
+	 * @param image
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/image", headers = "Accept=application/json")
 	public String image(ModelMap m, @RequestParam("image") MultipartFile image, HttpServletRequest request) {
 		
@@ -55,20 +62,30 @@ public class UploadFileController {
 		return "/admin/image/main";
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/file", headers = "Accept=application/json")
-	public ResponseEntity<Map<String, Object>> file(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+	/**
+	 * json
+	 * @return
+	 */
+	@RequestMapping(value={"/ajax"}, method = RequestMethod.GET)
+	public String json() {
+		return "/admin/image/ajax";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/ajax", headers = "Accept=application/json")
+	public ResponseEntity<Map<String, Object>> ajax(@RequestParam("image") MultipartFile image, HttpServletRequest request) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		String fileReturn = "";
-		String filename = file.getOriginalFilename();
+		String filename = image.getOriginalFilename();
 		
-		if(!file.isEmpty()){
+		if(!image.isEmpty()){
+		
 			try{
 				filename = UUID.randomUUID() + filename.substring(filename.lastIndexOf("."));
 				
-				byte[] bytes = file.getBytes();
+				byte[] bytes = image.getBytes();
 				// creating the directory to store file
-				String savePath = request.getSession().getServletContext().getRealPath("/WEB-INF/resources/file/");
+				String savePath = request.getSession().getServletContext().getRealPath("/WEB-INF/resources/images/user/");
 				
 				File path = new File(savePath);
 				if(!path.exists()){

@@ -45,7 +45,7 @@
 					<div class="content-body">
 						<section class="box ">
 								<header class="panel_header">
-									<h2 class="title pull-left">Upload Image</h2>
+									<h2 class="title pull-left">Ajax Upload Image</h2>
 								</header>
 						
 							<br/>
@@ -54,8 +54,7 @@
 						  <div class="row" id="content-body">
 						  	
 						  	<!---------------START FORM-------------->
-							<form  class="form-horizontal" action="<%= request.getContextPath()%>/admin/upload/image" method="post" role="form" id="myform" enctype="multipart/form-data">
-								
+							<form  class="form-horizontal"  role="form" id="myform" enctype="multipart/form-data">
 								
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 									<div class="form-group">
@@ -68,24 +67,26 @@
 												  </div>
 											  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
 											  <div>
-												    <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="image"></span>
+												    <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span>
+												    <span class="fileinput-exists">Change</span><input type="file" name="image"></span>
 												    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
 											  </div>
 											</div>
+											
 										</div>
 									</div>
 								
 									<div class="form-group">
 										<label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">Action</label>
 										<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-											<input type="submit" value="Add" class="btn btn-success" />
+											<input type="button" id="btnSave" value="Add" class="btn btn-success" />
 										</div>
 									</div>
 								
 								</div>
 								
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-									<p>Result: ${image }</p>
+									<h3>Result:</h3>${image }
 									<img src="<%= request.getContextPath()%>/resources/images/user/${image }" class="img-rounded" alt="" width="250" height="180"> 
 				        			
 				        		</div>
@@ -94,8 +95,7 @@
 							
 						  </div><!-- /row -->
 						 </section>
-						 
-					
+				
 						
 					</div>
                 </section>
@@ -123,8 +123,29 @@
 		<!-- Jquery Validator END --> 
 		
 		<script type="text/javascript">
-		
-		
+		$(document).ready(function(){
+			$('#btnSave').click(function(){
+					 $.ajax({
+				        url 		: "${pageContext.request.contextPath}/admin/upload",
+				        method		: "POST",
+			 			data		: $('#myform').serialize(),
+			 			//dataType	: "json",
+				        success 	: function(data) {
+							           	if(data.STATUS == true){
+							           		swal("Status Was created", "You clicked the button!", "success");
+							           	}
+			           },
+			           error 		: function(data){
+										swal(
+										  'Oops...',
+										  'Something went wrong!',
+										  'error'
+										);
+			           					console.log("check controller" + JSON.stringify(data));
+			           }
+			       });	 
+			});
+		});
 		</script>
 </body>
 </html>
