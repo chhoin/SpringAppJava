@@ -1,4 +1,4 @@
-package com.spring.app.utilities;
+package com.spring.app.utilities.validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.mail.internet.AddressException;

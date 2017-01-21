@@ -7,6 +7,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.app.utilities.validator.MyImageExtensionValidator;
+
 /**
  * 
  * @author sok.kimchhoin

@@ -1,4 +1,4 @@
-package com.spring.app.utilities;
+package com.spring.app.utilities.validator;
 
 public class MyValidationUtils {
 /*
