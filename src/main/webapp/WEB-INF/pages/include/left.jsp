@@ -53,6 +53,13 @@
 								 <li class=""> <a href="<%= request.getContextPath()%>/admin/language/kh"> <i class="fa fa-plus-square"></i> <span class="title">Kh</span></a> </li>
                             </ul>
                         </li>
+                         <!-- Validator -->
+                        <li class=""> <a href="javascript:;"> <i class="fa fa-user"></i> <span class="title">Validator</span> <span class="arrow "></span> </a>
+                            <ul class="sub-menu">
+								 <li class=""> <a href="<%= request.getContextPath()%>/admin/validator/serverIndex"> <i class="fa fa-plus-square"></i> <span class="title">Server</span></a> </li>
+								 <li class=""> <a href="<%= request.getContextPath()%>/admin/validator/jqueryIndex"> <i class="fa fa-plus-square"></i> <span class="title">Jquery</span></a> </li>
+                            </ul>
+                        </li>
                                                 
                     </ul>
 					 <!------------ END LEFT MENU -------------->
