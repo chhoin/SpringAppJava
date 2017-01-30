@@ -47,40 +47,67 @@
 								</header>
 							<br/>
 							<br/>
+							<div class="col-xs-12">
+									<p class="text-center">${message}</p>
+							</div>
 						
 						  <div class="row" id="content-body">
 							<div class="col-xs-12">
 							
-								<form:form  class="form-horizontal" action="${pageContext.request.contextPath}/admin/user/${action}" method="post" role="form" id="myform" enctype="multipart/form-data">
+								<form:form modelAttribute="testValidate"  commandName="testValidate" class="form-horizontal" action="${pageContext.request.contextPath}/admin/validator/server" method="post" enctype="multipart/form-data">
 							
 									<div class="form-group">
-										<label class="col-sm-3 control-label">User Name</label>
+										<label class="col-sm-3 control-label">String</label>
 										<div class="col-sm-9">
-											<input type="text" name="username" id="username" value="${user.username }" class="form-control" placeholder="User Name" required>
-											<form:errors path="username" cssClass="error"/>
+											<form:input path="string" value="${testValidate.string }" class="form-control" placeholder="String, min5, max10, not null"/>
+											<form:errors path="string" cssStyle="color: #ff0000;" element="div"/>
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label class="col-sm-3 control-label">Email</label>
+										<label class="col-sm-3 control-label">phone</label>
 										<div class="col-sm-9">
-											<input type="email" name="email" id="email" value="${user.email }" class="form-control" placeholder="Email" required>
-											<form:errors path="email" cssClass="error"/>
+											<form:input path="phone" value="${testValidate.phone }" class="form-control" placeholder="Not null, Number"/>
+											<form:errors path="phone" cssStyle="color: #ff0000;"/>
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label class="col-sm-3 control-label">Phone</label>
+										<label class="col-sm-3 control-label">email</label>
 										<div class="col-sm-9">
-											<input type="text" name="phone" id="phone" value="${user.phone }" class="form-control" placeholder="phone" >
+											<form:input path="email"  value="${testValidate.email }" class="form-control" placeholder="email, not null" />
+											<form:errors path="email" />
 										</div>
 									</div>
 									
-								
 									<div class="form-group">
-										<label class="col-sm-3 control-label">Date Of Birth</label>
+										<label class="col-sm-3 control-label">pass</label>
 										<div class="col-sm-9">
-											<input type="date" name="dob" id="dob" value="${user.dobDate }" class="form-control" placeholder="dob" >
+											<form:input path="pass"  value="${testValidate.pass }" class="form-control" placeholder="pass, not null" />
+											<form:errors path="pass" />
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label">url</label>
+										<div class="col-sm-9">
+											<form:input path="url"  value="${testValidate.url }" class="form-control" placeholder="url, not null" />
+											<form:errors path="url" />
+										</div>
+									</div>
+									
+									<%-- <div class="form-group">
+										<label class="col-sm-3 control-label">birthday</label>
+										<div class="col-sm-9">
+											<form:input path="birthday" value="${testValidate.birthday }" class="form-control" placeholder="birthday"/>
+											<form:errors path="birthday" />
+										</div>
+									</div> --%>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Action</label>
+										<div class="col-sm-9">
+											<input type="submit" value="Test" class="btn btn-primary"/>
 										</div>
 									</div>
 									
