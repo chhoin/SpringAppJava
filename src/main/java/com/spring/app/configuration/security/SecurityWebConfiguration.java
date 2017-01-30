@@ -103,12 +103,13 @@ public class SecurityWebConfiguration extends WebSecurityConfigurerAdapter{
 			.tokenValiditySeconds(1209600);
 	}
 	
-	
+	//session management
 	@Bean
 	protected SessionRegistry sessionRegistryImpl(){
 		return new SessionRegistryImpl();
 	}
 	
+	//encrypt password
 	@Bean
 	public PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
@@ -122,7 +123,7 @@ public class SecurityWebConfiguration extends WebSecurityConfigurerAdapter{
 		return db;
 	}
 	
-	//???
+	//after log in will redirect to request URL
 	@Bean
 	public SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareAuthenticationSuccessHandler() {
 		SavedRequestAwareAuthenticationSuccessHandler auth = new SavedRequestAwareAuthenticationSuccessHandler();
