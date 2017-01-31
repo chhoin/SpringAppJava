@@ -2,7 +2,6 @@ package com.spring.app.entities;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -12,10 +11,10 @@ import javax.validation.constraints.Size;
  */
 public class ValidateEntity {
 
-	@Size(min = 4, max = 50)
+	
 	private String string;
 
-	@NotNull
+	@Size(min = 9, message = "Enter atleast 9 characters")
 	private String phone;
 
 	private String email;
@@ -25,6 +24,8 @@ public class ValidateEntity {
 	private String url;
 
 	private Date birthday;
+	
+	public ValidateEntity(){}
 
 	public String getString() {
 		return string;

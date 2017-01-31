@@ -54,20 +54,22 @@
 						  <div class="row" id="content-body">
 							<div class="col-xs-12">
 							
-								<form:form modelAttribute="testValidate"  commandName="testValidate" class="form-horizontal" action="${pageContext.request.contextPath}/admin/validator/server" method="post" enctype="multipart/form-data">
+								<form:form   commandName="testValidate" class="form-horizontal" action="${pageContext.request.contextPath}/admin/validator/server" method="post" enctype="multipart/form-data">
 							
 									<div class="form-group">
 										<label class="col-sm-3 control-label">String</label>
 										<div class="col-sm-9">
-											<form:input path="string" value="${testValidate.string }" class="form-control" placeholder="String, min5, max10, not null"/>
-											<form:errors path="string" cssStyle="color: #ff0000;" element="div"/>
+											<form:input path="string"  class="form-control" placeholder="String, min5, max10, not null"/>
+											<div class="has-error">
+												<form:errors path="string" cssStyle="color: #ff0000;" element="div"/>
+											</div>
 										</div>
 									</div>
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label">phone</label>
 										<div class="col-sm-9">
-											<form:input path="phone" value="${testValidate.phone }" class="form-control" placeholder="Not null, Number"/>
+											<form:input path="phone" class="form-control" placeholder="Not null, Number"/>
 											<form:errors path="phone" cssStyle="color: #ff0000;"/>
 										</div>
 									</div>
@@ -75,7 +77,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">email</label>
 										<div class="col-sm-9">
-											<form:input path="email"  value="${testValidate.email }" class="form-control" placeholder="email, not null" />
+											<form:input path="email" class="form-control" placeholder="email, not null" />
 											<form:errors path="email" />
 										</div>
 									</div>
@@ -83,7 +85,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">pass</label>
 										<div class="col-sm-9">
-											<form:input path="pass"  value="${testValidate.pass }" class="form-control" placeholder="pass, not null" />
+											<form:input path="pass"   class="form-control" placeholder="pass, not null" />
 											<form:errors path="pass" />
 										</div>
 									</div>
@@ -91,7 +93,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">url</label>
 										<div class="col-sm-9">
-											<form:input path="url"  value="${testValidate.url }" class="form-control" placeholder="url, not null" />
+											<form:input path="url"   class="form-control" placeholder="url, not null" />
 											<form:errors path="url" />
 										</div>
 									</div>
@@ -99,7 +101,7 @@
 									<%-- <div class="form-group">
 										<label class="col-sm-3 control-label">birthday</label>
 										<div class="col-sm-9">
-											<form:input path="birthday" value="${testValidate.birthday }" class="form-control" placeholder="birthday"/>
+											<form:input path="birthday" class="form-control" placeholder="birthday"/>
 											<form:errors path="birthday" />
 										</div>
 									</div> --%>
