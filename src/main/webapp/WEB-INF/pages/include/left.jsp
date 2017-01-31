@@ -34,8 +34,8 @@
                         <!-- Crud Sample -->
                         <li class=""> <a href="javascript:;"> <i class="fa fa-user"></i> <span class="title">Crud Sample</span> <span class="arrow "></span> </a>
                             <ul class="sub-menu">
-								 <li class=""> <a href="<%= request.getContextPath()%>/admin/crud/main"> <i class="fa fa-plus-square"></i> <span class="title">Main Controller</span></a> </li>
-								 <li class=""> <a href="<%= request.getContextPath()%>/admin/crud/json"> <i class="fa fa-plus-square"></i> <span class="title">Json Controller</span></a> </li>
+								 <li class=""> <a href="<%= request.getContextPath()%>/admin/status/main/index"> <i class="fa fa-plus-square"></i> <span class="title">Main Controller</span></a> </li>
+								 <li class=""> <a href="<%= request.getContextPath()%>/admin/status/json/index"> <i class="fa fa-plus-square"></i> <span class="title">Json Controller</span></a> </li>
                             </ul>
                         </li>
                         

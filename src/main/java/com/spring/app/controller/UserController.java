@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.app.common.UserStatus;
 import com.spring.app.entities.Pagination;
-import com.spring.app.entities.Status;
+import com.spring.app.entities.StatusUSER;
 import com.spring.app.entities.User;
 import com.spring.app.services.ser.RoleService;
 import com.spring.app.services.ser.UserService;
@@ -143,10 +143,10 @@ public class UserController {
 	@RequestMapping(value="/edit/{id}", method = RequestMethod.GET)
 	public String edit(ModelMap m, @PathVariable("id") String id) {
 		
-		ArrayList<Status> status = new ArrayList<Status>();
-		status.add(new Status(UserStatus.ACTIVE, "Active"));
-		status.add(new Status(UserStatus.DELETE, "Delete"));
-		status.add(new Status(UserStatus.PENDING, "Pending"));
+		ArrayList<StatusUSER> status = new ArrayList<StatusUSER>();
+		status.add(new StatusUSER(UserStatus.ACTIVE, "Active"));
+		status.add(new StatusUSER(UserStatus.DELETE, "Delete"));
+		status.add(new StatusUSER(UserStatus.PENDING, "Pending"));
 		
 		m.addAttribute("title"		,	"Update User" )
 		 .addAttribute("message"	,	"")
@@ -168,10 +168,10 @@ public class UserController {
 	@RequestMapping(value={"/update"}, method = RequestMethod.POST)
 	public String update(@RequestParam("image") MultipartFile image, ModelMap m, User user, HttpServletRequest request) {
 		
-		ArrayList<Status> status = new ArrayList<Status>();
-		status.add(new Status(UserStatus.ACTIVE, "Active"));
-		status.add(new Status(UserStatus.DELETE, "Delete"));
-		status.add(new Status(UserStatus.PENDING, "Pending"));
+		ArrayList<StatusUSER> status = new ArrayList<StatusUSER>();
+		status.add(new StatusUSER(UserStatus.ACTIVE, "Active"));
+		status.add(new StatusUSER(UserStatus.DELETE, "Delete"));
+		status.add(new StatusUSER(UserStatus.PENDING, "Pending"));
 		
 		if(!image.isEmpty()) {
 			user.setThumnail(MyUploadFile.UploadImage(image, request));	

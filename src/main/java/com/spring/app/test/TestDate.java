@@ -25,7 +25,7 @@ public class TestDate {
 		
 		System.out.println(hours +":"+ minutes +":"+ seconds +" UTC");*/
 		
-		System.out.println(MyDateUtils.getDateLabel(MyDateUtils.today(), "yyyy-MM-dd"));
+		System.out.println(MyDateUtils.getDateAtEndOfLastMonth());
 
 	}
 

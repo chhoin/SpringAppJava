@@ -5,12 +5,12 @@ package com.spring.app.entities;
  * @author sok.kimchhoin
  *
  */
-public class Status {
+public class StatusUSER {
 	
 	private String value;
 	private String title;
 	
-	public Status(String v, String t){
+	public StatusUSER(String v, String t){
 		this.value = v;
 		this.title = t;
 	}
