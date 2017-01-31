@@ -30,14 +30,16 @@
                                 <span class="title">Dashboard</span>
                             </a>
                         </li>
-                        <!-- User -->
-                        <li class=""> <a href="javascript:;"> <i class="fa fa-user"></i> <span class="title">User Management</span> <span class="arrow "></span> </a>
+                        
+                        <!-- Crud Sample -->
+                        <li class=""> <a href="javascript:;"> <i class="fa fa-user"></i> <span class="title">Crud Sample</span> <span class="arrow "></span> </a>
                             <ul class="sub-menu">
-								 <li class=""> <a href="<%= request.getContextPath()%>/admin/user/index"> <i class="fa fa-plus-square"></i> <span class="title">Users</span></a> </li>
-								 <li class=""> <a href="<%= request.getContextPath()%>/admin/user/role"> <i class="fa fa-plus-square"></i> <span class="title">Manage Role</span></a> </li>
+								 <li class=""> <a href="<%= request.getContextPath()%>/admin/crud/main"> <i class="fa fa-plus-square"></i> <span class="title">Main Controller</span></a> </li>
+								 <li class=""> <a href="<%= request.getContextPath()%>/admin/crud/json"> <i class="fa fa-plus-square"></i> <span class="title">Json Controller</span></a> </li>
                             </ul>
                         </li>
-                        <!-- Feature -->
+                        
+                        <!-- Upload File -->
 						<li class=""> <a href="javascript:;"> <i class="fa fa-user"></i> <span class="title">Upload Image</span> <span class="arrow "></span> </a>
                             <ul class="sub-menu">
 								 <li class=""> <a href="<%= request.getContextPath()%>/admin/upload/index"> <i class="fa fa-plus-square"></i> <span class="title">Upload by Form</span></a> </li>
@@ -58,6 +60,14 @@
                             <ul class="sub-menu">
 								 <li class=""> <a href="<%= request.getContextPath()%>/admin/validator/serverIndex"> <i class="fa fa-plus-square"></i> <span class="title">Server</span></a> </li>
 								 <li class=""> <a href="<%= request.getContextPath()%>/admin/validator/jqueryIndex"> <i class="fa fa-plus-square"></i> <span class="title">Jquery</span></a> </li>
+                            </ul>
+                        </li>
+                        
+                         <!-- User -->
+                        <li class=""> <a href="javascript:;"> <i class="fa fa-user"></i> <span class="title">User Management</span> <span class="arrow "></span> </a>
+                            <ul class="sub-menu">
+								 <li class=""> <a href="<%= request.getContextPath()%>/admin/user/index"> <i class="fa fa-plus-square"></i> <span class="title">Users</span></a> </li>
+								 <li class=""> <a href="<%= request.getContextPath()%>/admin/user/role"> <i class="fa fa-plus-square"></i> <span class="title">Manage Role</span></a> </li>
                             </ul>
                         </li>
                                                 
