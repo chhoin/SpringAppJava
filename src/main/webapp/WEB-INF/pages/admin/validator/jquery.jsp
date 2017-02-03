@@ -54,12 +54,12 @@
 						  <div class="row" id="content-body">
 							<div class="col-xs-12">
 							
-								<form:form   modelAttribute="student" class="form-horizontal" action="${pageContext.request.contextPath}/admin/validator/server" method="post" enctype="multipart/form-data">
+								<form:form id="myForm"  modelAttribute="student" class="form-horizontal" action="${pageContext.request.contextPath}/admin/validator/server" method="post" enctype="multipart/form-data">
 							
 									<div class="form-group">
 										<label class="col-sm-3 control-label">name</label>
 										<div class="col-sm-9">
-											<form:input path="name" id="name" class="form-control" placeholder="name"/>
+											<form:input path="name" class="form-control" id="name" placeholder="name"/>
 											<form:errors path="name" cssStyle="color: #ff0000;"/>
 										</div>
 									</div>
@@ -67,7 +67,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">email</label>
 										<div class="col-sm-9">
-											<form:input path="email" class="form-control" placeholder="email" />
+											<form:input path="email" id="email" class="form-control" placeholder="email" />
 											<form:errors path="email" cssStyle="color: #ff0000;" />
 										</div>
 									</div>
@@ -75,7 +75,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">phone</label>
 										<div class="col-sm-9">
-											<form:input path="phone"   class="form-control" placeholder="phone, number" />
+											<form:input path="phone" id="phone"  class="form-control" placeholder="phone, number" />
 											<form:errors path="phone" cssStyle="color: #ff0000;"/>
 										</div>
 									</div>
@@ -83,15 +83,16 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">url</label>
 										<div class="col-sm-9">
-											<form:input path="url"   class="form-control" placeholder="url, not null" />
+											<form:input path="url"  id="url" class="form-control" placeholder="url, not null" />
 											<form:errors path="url" cssStyle="color: #ff0000;"/>
 										</div>
 									</div>
 									
+									
 									<div class="form-group">
 										<label class="col-sm-3 control-label">Action</label>
 										<div class="col-sm-9">
-											<input type="submit" value="Test" class="btn btn-primary"/>
+											<input type="button" value="Test" id="btnTest" class="btn btn-primary"/>
 										</div>
 									</div>
 									
@@ -122,8 +123,61 @@
 		<script  src="<%= request.getContextPath()%>/resources/assetAdmin/sweetalert2/sweetalert2.min.js" type="text/javascript"></script>
 		<!-- OTHER JS INCLUDE END-->
 		
-		<script type="text/javascript">
+		<!-- Jquery Validator --> 
+		<script  src="<%= request.getContextPath()%>/resources/assetAdmin/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script> 
+		<script  src="<%= request.getContextPath()%>/resources/assetAdmin/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+		<!-- Jquery Validator END --> 
 		
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$('#btnTest').click(function(){
+				if($("#myForm").valid() ){	
+					
+					alert("Test Success");
+				}
+			});
+		});
+		
+		myValidate();
+		function myValidate(){
+			$( "#myForm" ).validate( {
+				rules: {
+					name: {
+						required	: true,
+						minlength	: 2
+					},
+					email:	{
+						required	: true,
+						email		: true
+					},
+					phone:	{
+						required 	: true,
+						number		: true,
+						minlength	: 9,
+						maxlength	: 10
+					},
+					url:	{
+						required	: true
+					}
+				},
+				messages: {
+				
+				},
+				invalidHandler: function(event, validator) {
+	                //display error alert on form submit    
+	            },
+	            errorPlacement: function(label, element) { // render error placement for each input type   
+	                console.log(label);
+	                $('<span class="error"></span>').insertAfter(element).append(label)
+	                var parent = $(element).parent().parent('.form-group');
+	                parent.removeClass('has-success').addClass('has-error');
+	            },
+	            success: function(label, element) {
+	                var parent = $(element).parent().parent('.form-group');
+	                parent.removeClass('has-error').addClass('has-success');
+	            }
+			} );
+		}
 		</script>
 </body>
 </html>
