@@ -69,4 +69,13 @@ public class WebConfiguration extends WebMvcConfigurerAdapter{
 		return dataSource;
 	}
 	
+	@Bean
+	public String getMessage() {
+		
+		return "Kimchhoin";
+		
+		/*@Autowired
+		String message;*/
+	}
+	
 }
